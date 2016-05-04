@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-04T03:47:41.000Z</updated>
+  <updated>2016-05-04T04:26:24.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo本地博客系统以及github page建博客流程</title>
+    <link href="http://yoursite.com/2016/05/04/hexo%E6%9C%AC%E5%9C%B0%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E4%BB%A5%E5%8F%8Agithub-page%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%B5%81%E7%A8%8B/"/>
+    <id>http://yoursite.com/2016/05/04/hexo本地博客系统以及github-page建博客流程/</id>
+    <published>2016-05-04T04:02:15.000Z</published>
+    <updated>2016-05-04T04:26:24.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;大概记录下搭建这个博客的流程&quot;&gt;&lt;a href=&quot;#大概记录下搭建这个博客的流程&quot; class=&quot;headerlink&quot; title=&quot;大概记录下搭建这个博客的流程&quot;&gt;&lt;/a&gt;大概记录下搭建这个博客的流程&lt;/h2&gt;&lt;h3 id=&quot;这里只提大体流程，详细步骤可以参考下面的参考文章&quot;&gt;&lt;a href=&quot;#这里只提大体流程，详细步骤可以参考下面的参考文章&quot; class=&quot;headerlink&quot; title=&quot;这里只提大体流程，详细步骤可以参考下面的参考文章&quot;&gt;&lt;/a&gt;这里只提大体流程，详细步骤可以参考下面的参考文章&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;在github上申请新建一个repo，注意命名规范，这个会涉及到以后访问博客的url。这个repo就是以后博客的文章存放的地方&lt;/li&gt;
+&lt;li&gt;搭建本地hexo博客系统。因为正常的流程都是从本地写好文章，部署到上面的repo就可以的。hexo系统可以方便地在本地写，支持命令行，还可以预览。文章本地写好之后就可以通过hexo直接部署到repo。&lt;/li&gt;
+&lt;li&gt;配置hexo的部署需要在guthub网站上面配置ssh，然后在hexo里面的_config.yml填上你的仓库地址，第一次命令行部署需要填写github用户名和密码。&lt;/li&gt;
+&lt;li&gt;可以自己更换一个博客的主题，需要配置一下config.yml，具体见下面的参考文章&lt;/li&gt;
+&lt;li&gt;图片较多的话建议使用图床，我看其他教程里面七牛的多，试了下感觉还蛮好~~&lt;/li&gt;
+&lt;/ol&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;写博客流程&quot;&gt;&lt;a href=&quot;#写博客流程&quot; class=&quot;headerlink&quot; title=&quot;写博客流程&quot;&gt;&lt;/a&gt;写博客流程&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;命令行进入博客的目录&lt;/li&gt;
+&lt;li&gt;hexo new ‘文章标题’ ， 这时会在source/_post里面生成对应的文件夹和.md ，文件夹是用来存放此文章里面的资源的，例如图片&lt;/li&gt;
+&lt;li&gt;编辑md文件，这个就是以后要发布的文章的内容，注意是按照Markdown语法来写的html，可以使用markdown编辑器，注意标记和内容之间的空格 和行之间空行&lt;/li&gt;
+&lt;li&gt;hexo g （generate）， 将上面编辑的md生成html&lt;/li&gt;
+&lt;li&gt;hexo s  （server），启动本地服务器预览文章， localhost：4000&lt;/li&gt;
+&lt;li&gt;hexo d （deploy）预览无疑之后发布 ， 然后在 XXX.github.io里面就能看到写好的文章啦~&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;参考文章&quot;&gt;&lt;a href=&quot;#参考文章&quot; class=&quot;headerlink&quot; title=&quot;参考文章&quot;&gt;&lt;/a&gt;参考文章&lt;/h3&gt;&lt;p&gt;[1]. &lt;a href=&quot;http://www.jianshu.com/p/ecd51e8ef2fa&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/ecd51e8ef2fa&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[2]. &lt;a href=&quot;http://www.jianshu.com/p/05289a4bc8b2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/05289a4bc8b2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[3]. ..&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;大概记录下搭建这个博客的流程&quot;&gt;&lt;a href=&quot;#大概记录下搭建这个博客的流程&quot; class=&quot;headerlink&quot; title=&quot;大概记录下搭建这个博客的流程&quot;&gt;&lt;/a&gt;大概记录下搭建这个博客的流程&lt;/h2&gt;&lt;h3 id=&quot;这里只提大体流程，详细步骤可以参考下面的参考文章&quot;&gt;&lt;a href=&quot;#这里只提大体流程，详细步骤可以参考下面的参考文章&quot; class=&quot;headerlink&quot; title=&quot;这里只提大体流程，详细步骤可以参考下面的参考文章&quot;&gt;&lt;/a&gt;这里只提大体流程，详细步骤可以参考下面的参考文章&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;在github上申请新建一个repo，注意命名规范，这个会涉及到以后访问博客的url。这个repo就是以后博客的文章存放的地方&lt;/li&gt;
+&lt;li&gt;搭建本地hexo博客系统。因为正常的流程都是从本地写好文章，部署到上面的repo就可以的。hexo系统可以方便地在本地写，支持命令行，还可以预览。文章本地写好之后就可以通过hexo直接部署到repo。&lt;/li&gt;
+&lt;li&gt;配置hexo的部署需要在guthub网站上面配置ssh，然后在hexo里面的_config.yml填上你的仓库地址，第一次命令行部署需要填写github用户名和密码。&lt;/li&gt;
+&lt;li&gt;可以自己更换一个博客的主题，需要配置一下config.yml，具体见下面的参考文章&lt;/li&gt;
+&lt;li&gt;图片较多的话建议使用图床，我看其他教程里面七牛的多，试了下感觉还蛮好~~&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>读研之经历</title>
