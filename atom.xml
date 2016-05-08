@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-04T04:26:24.000Z</updated>
+  <updated>2016-05-08T17:03:04.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,88 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>c++ vector容器常用操作</title>
+    <link href="http://yoursite.com/2016/05/09/c-vector%E5%AE%B9%E5%99%A8%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/"/>
+    <id>http://yoursite.com/2016/05/09/c-vector容器常用操作/</id>
+    <published>2016-05-08T16:20:46.000Z</published>
+    <updated>2016-05-08T17:03:04.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。&quot;&gt;&lt;a href=&quot;#其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。&quot; class=&quot;headerlink&quot; title=&quot;其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。&quot;&gt;&lt;/a&gt;其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。&lt;/h2&gt;&lt;h4 id=&quot;Note：&quot;&gt;&lt;a href=&quot;#Note：&quot; class=&quot;headerlink&quot; title=&quot;Note：&quot;&gt;&lt;/a&gt;Note：&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;尽量使用reserve来减少不必要的内存分配次数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;原则：尽量使用empty()而不是size()==0 来判断容器是否为空&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h4 id=&quot;0x00-vector-的初始化&quot;&gt;&lt;a href=&quot;#0x00-vector-的初始化&quot; class=&quot;headerlink&quot; title=&quot;0x00 vector 的初始化&quot;&gt;&lt;/a&gt;0x00 vector 的初始化&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;vector&amp;lt;int&amp;gt; v2(10); //初始化size为10可以避免数组动态增长的时候不断的分配内存
+//或者vec.reserve(10); 功能同上
+
+int  v1[10] = {0,1,0,0,3,0,0,4,4,4};
+vector&amp;lt;int&amp;gt; v3(&amp;amp;v1[0],&amp;amp;v1[9]);//原始数组的元素指针可以作为迭代器来使用
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;0x01-使用迭代器访问元素&quot;&gt;&lt;a href=&quot;#0x01-使用迭代器访问元素&quot; class=&quot;headerlink&quot; title=&quot;0x01. 使用迭代器访问元素&quot;&gt;&lt;/a&gt;0x01. 使用迭代器访问元素&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;vector&amp;lt;int&amp;gt;::iterator it;
+
+for(it=vec.begin();it!=vec.end();it++)
+
+cout&amp;lt;&amp;lt;*it&amp;lt;&amp;lt;endl;
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;0x02-和其他容器都类似，支持begin和end获取首尾指针&quot;&gt;&lt;a href=&quot;#0x02-和其他容器都类似，支持begin和end获取首尾指针&quot; class=&quot;headerlink&quot; title=&quot;0x02 和其他容器都类似，支持begin和end获取首尾指针&quot;&gt;&lt;/a&gt;0x02 和其他容器都类似，支持begin和end获取首尾指针&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;//传入sort函数
+sort(vec.begin(), vec.end(), Cmp);
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;0x03-获取首尾元素和大小情况&quot;&gt;&lt;a href=&quot;#0x03-获取首尾元素和大小情况&quot; class=&quot;headerlink&quot; title=&quot;0x03 获取首尾元素和大小情况&quot;&gt;&lt;/a&gt;0x03 获取首尾元素和大小情况&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;vec.front(); vec.back(); vec.size()； vec.empty();
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;0x04-元素的插入和删除&quot;&gt;&lt;a href=&quot;#0x04-元素的插入和删除&quot; class=&quot;headerlink&quot; title=&quot;0x04 元素的插入和删除&quot;&gt;&lt;/a&gt;0x04 元素的插入和删除&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;//在尾部增加和删除元素
+
+vec.push_back();
+
+vec.pop_back(); //可用来模仿stack和quene
+
+vec.clear() ; //清除元素
+
+vec.insert(vec.begin()+i,a);在第i+1个元素前面插入a;
+
+// erase the 6th element
+myvector.erase (myvector.begin()+5);
+
+// erase the first 3 elements:
+myvector.erase (myvector.begin(),myvector.begin()+3); //其实一般都是左闭右开 &amp;lt;=  &amp;lt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;0x05-常用算法&quot;&gt;&lt;a href=&quot;#0x05-常用算法&quot; class=&quot;headerlink&quot; title=&quot;0x05 常用算法&quot;&gt;&lt;/a&gt;0x05 常用算法&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;//1. sort
+
+sort(vec.begin(),vec.end());(默认是按升序排列,即从小到大).
+
+//可以通过重写排序比较函数按照降序比较，如下：
+
+//定义排序比较函数：
+
+bool Comp(const int &amp;amp;a,const int &amp;amp;b)
+{
+    return a&amp;gt;b;
+}
+//调用时:
+sort(vec.begin(),vec.end(),Comp)，这样就降序排序。其他类型的一样，    总之最后返回bool值就行
+
+//2. reverse
+reverse(vec.begin(),vec.end());将元素翻转
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;PS-发现这里的文档很详细，还有示例代码参考，这里没有的可以参考下：&quot;&gt;&lt;a href=&quot;#PS-发现这里的文档很详细，还有示例代码参考，这里没有的可以参考下：&quot; class=&quot;headerlink&quot; title=&quot;PS: 发现这里的文档很详细，还有示例代码参考，这里没有的可以参考下：&quot;&gt;&lt;/a&gt;PS: 发现这里的文档很详细，还有示例代码参考，这里没有的可以参考下：&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://www.cplusplus.com/reference/vector/vector/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;www.cplusplus.com/reference/vector/vector&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;晚安 ~~&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。&quot;&gt;&lt;a href=&quot;#其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。&quot; class=&quot;headerlink&quot; title=&quot;其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。&quot;&gt;&lt;/a&gt;其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。&lt;/h2&gt;&lt;h4 id=&quot;Note：&quot;&gt;&lt;a href=&quot;#Note：&quot; class=&quot;headerlink&quot; title=&quot;Note：&quot;&gt;&lt;/a&gt;Note：&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;尽量使用reserve来减少不必要的内存分配次数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;原则：尽量使用empty()而不是size()==0 来判断容器是否为空&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="c++" scheme="http://yoursite.com/tags/c/"/>
+    
+      <category term="vector" scheme="http://yoursite.com/tags/vector/"/>
+    
+  </entry>
   
   <entry>
     <title>hexo本地博客系统以及github page建博客流程</title>
