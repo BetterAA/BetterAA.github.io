@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-08T17:03:04.000Z</updated>
+  <updated>2016-06-15T08:09:42.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,107 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hadoop hive 分区partition</title>
+    <link href="http://yoursite.com/2016/06/15/Hadoop-hive-%E5%88%86%E5%8C%BApartition/"/>
+    <id>http://yoursite.com/2016/06/15/Hadoop-hive-分区partition/</id>
+    <published>2016-06-15T07:23:34.000Z</published>
+    <updated>2016-06-15T08:09:42.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;Hive是啥子？&quot;&gt;&lt;a href=&quot;#Hive是啥子？&quot; class=&quot;headerlink&quot; title=&quot;Hive是啥子？&quot;&gt;&lt;/a&gt;Hive是啥子？&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;Hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。（将输入的hql语句解析成待提交的job）&lt;/li&gt;
+&lt;li&gt;本质是将SQL转换为MapReduce程序&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;Hive-特点&quot;&gt;&lt;a href=&quot;#Hive-特点&quot; class=&quot;headerlink&quot; title=&quot;Hive 特点&quot;&gt;&lt;/a&gt;Hive 特点&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;可扩展： 可自由扩展集群规模，一般无需重启服务&lt;/li&gt;
+&lt;li&gt;延展性： 支持自定义函数&lt;/li&gt;
+&lt;li&gt;容错性： 良好的容错性，节点出现问题SQL仍可完成&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;hive与Hadoop的关系&quot;&gt;&lt;a href=&quot;#hive与Hadoop的关系&quot; class=&quot;headerlink&quot; title=&quot;hive与Hadoop的关系&quot;&gt;&lt;/a&gt;hive与Hadoop的关系&lt;/h3&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;&lt;img src=&quot;hadoop-hive.jpg&quot; alt=&quot;hive与hadoop的关系&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;关于分区partition的概念&quot;&gt;&lt;a href=&quot;#关于分区partition的概念&quot; class=&quot;headerlink&quot; title=&quot;关于分区partition的概念&quot;&gt;&lt;/a&gt;关于分区partition的概念&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;在Hive Select语句查询中一般会扫描整个表内容，会消耗很多时间做没必要的工作。有时候只需要扫描表中关心的一部分数据，因此建表时引入了partition概念&lt;/li&gt;
+&lt;li&gt;分区表指的是在创建表时指定的partition的分区空间&lt;/li&gt;
+&lt;li&gt;如果需要创建有分区的表，需要在create表的时候调用可选参数partitioned by，&lt;/li&gt;
+&lt;li&gt;一个表可以拥有一个或者多个分区，每个分区以文件夹的形式单独存在表文件夹的目录下。&lt;/li&gt;
+&lt;li&gt;分区是以字段的形式在表结构中存在，通过describe table命令可以查看到字段存在，但是该字段不存放实际的数据内容，仅仅是分区的表示。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&quot;分区建立&quot;&gt;&lt;a href=&quot;#分区建立&quot; class=&quot;headerlink&quot; title=&quot;分区建立&quot;&gt;&lt;/a&gt;分区建立&lt;/h4&gt;&lt;p&gt; 分区建表分为2种，一种是单分区，也就是说在表文件夹目录下只有一级文件夹目录。另外一种是多分区，表文件夹下出现多文件夹嵌套模式。&lt;/p&gt;
+&lt;p&gt;  a. 单分区建表语句：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;create table day_table (id int, content string) partitioned by (dt string);单分区表，按天分区，在表结构中存在id，content，dt三列。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  b. 双分区建表语句：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;create table day_hour_table (id int, content string) partitioned by (dt string, hour string);双分区表，按天和小时分区，在表结构中新增加了dt和hour两列。
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;添加分区&quot;&gt;&lt;a href=&quot;#添加分区&quot; class=&quot;headerlink&quot; title=&quot;添加分区&quot;&gt;&lt;/a&gt;添加分区&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;ALTER TABLE day_table ADD PARTITION (dt=&amp;apos;2008-08-08&amp;apos;, hour=&amp;apos;08&amp;apos;) location &amp;apos;/path/pv1.txt&amp;apos; PARTITION (dt=&amp;apos;2008-08-08&amp;apos;, hour=&amp;apos;09&amp;apos;) location &amp;apos;/path/pv2.txt&amp;apos;;    
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;删除分区&quot;&gt;&lt;a href=&quot;#删除分区&quot; class=&quot;headerlink&quot; title=&quot;删除分区&quot;&gt;&lt;/a&gt;删除分区&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;ALTER TABLE day_hour_table DROP PARTITION (dt=&amp;apos;2008-08-08&amp;apos;, hour=&amp;apos;09&amp;apos;);    
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;数据加载进分区&quot;&gt;&lt;a href=&quot;#数据加载进分区&quot; class=&quot;headerlink&quot; title=&quot;数据加载进分区&quot;&gt;&lt;/a&gt;数据加载进分区&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;LOAD DATA INPATH &amp;apos;/user/pv.txt&amp;apos; INTO TABLE day_hour_table PARTITION(dt=&amp;apos;2008-08- 08&amp;apos;, hour=&amp;apos;08&amp;apos;);
+
+LOAD DATA local INPATH &amp;apos;/user/hua/*&amp;apos; INTO TABLE day_hour partition(dt=&amp;apos;2010-07- 07&amp;apos;);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;   当数据被加载至表中时，不会对数据进行任何转换。Load操作只是将数据复制至Hive表对应的位置。数据加载时在表下自动创建一个目录，文件存放在该分区下。&lt;/p&gt;
+&lt;h4 id=&quot;基于分区的查询语句&quot;&gt;&lt;a href=&quot;#基于分区的查询语句&quot; class=&quot;headerlink&quot; title=&quot;基于分区的查询语句&quot;&gt;&lt;/a&gt;基于分区的查询语句&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;SELECT day_table.* FROM day_table WHERE day_table.dt&amp;gt;= &amp;apos;2008-08-08&amp;apos;;
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;查看表的分区&quot;&gt;&lt;a href=&quot;#查看表的分区&quot; class=&quot;headerlink&quot; title=&quot;查看表的分区&quot;&gt;&lt;/a&gt;查看表的分区&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;hive&amp;gt; 
+show partitions day_hour_table; 
+
+OK 
+dt=2008-08-08/hour=08 
+dt=2008-08-08/hour=09 
+dt=2008-08-09/hour=09;
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;总的说来partition就是辅助查询，缩小查询范围，加快数据的检索速度和对数据按照一定的规格和条件进行管理。&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Hive是啥子？&quot;&gt;&lt;a href=&quot;#Hive是啥子？&quot; class=&quot;headerlink&quot; title=&quot;Hive是啥子？&quot;&gt;&lt;/a&gt;Hive是啥子？&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;Hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。（将输入的hql语句解析成待提交的job）&lt;/li&gt;
+&lt;li&gt;本质是将SQL转换为MapReduce程序&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;Hive-特点&quot;&gt;&lt;a href=&quot;#Hive-特点&quot; class=&quot;headerlink&quot; title=&quot;Hive 特点&quot;&gt;&lt;/a&gt;Hive 特点&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;可扩展： 可自由扩展集群规模，一般无需重启服务&lt;/li&gt;
+&lt;li&gt;延展性： 支持自定义函数&lt;/li&gt;
+&lt;li&gt;容错性： 良好的容错性，节点出现问题SQL仍可完成&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;hive与Hadoop的关系&quot;&gt;&lt;a href=&quot;#hive与Hadoop的关系&quot; class=&quot;headerlink&quot; title=&quot;hive与Hadoop的关系&quot;&gt;&lt;/a&gt;hive与Hadoop的关系&lt;/h3&gt;
+    
+    </summary>
+    
+    
+      <category term="hadoop" scheme="http://yoursite.com/tags/hadoop/"/>
+    
+      <category term="hive" scheme="http://yoursite.com/tags/hive/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>c++ snippets</title>
+    <link href="http://yoursite.com/2016/05/10/c-snippets/"/>
+    <id>http://yoursite.com/2016/05/10/c-snippets/</id>
+    <published>2016-05-10T14:50:52.000Z</published>
+    <updated>2016-05-10T16:23:15.000Z</updated>
+    
+    <content type="html">&lt;h4 id=&quot;Note-带符号的整数n，进行-1乘n操作时，小心n-2147483648，这时-1-n会溢出，可以-n-1；&quot;&gt;&lt;a href=&quot;#Note-带符号的整数n，进行-1乘n操作时，小心n-2147483648，这时-1-n会溢出，可以-n-1；&quot; class=&quot;headerlink&quot; title=&quot;Note: 带符号的整数n，进行-1乘n操作时，小心n=-2147483648，这时-1*n会溢出，可以 n++-1；&quot;&gt;&lt;/a&gt;Note: 带符号的整数n，进行-1乘n操作时，小心n=-2147483648，这时-1*n会溢出，可以 n++-1；&lt;/h4&gt;&lt;h4 id=&quot;1-c-str-：生成一个const-char-指针，指向以空字符终止的数组。&quot;&gt;&lt;a href=&quot;#1-c-str-：生成一个const-char-指针，指向以空字符终止的数组。&quot; class=&quot;headerlink&quot; title=&quot;1. c_str()：生成一个const char*指针，指向以空字符终止的数组。&quot;&gt;&lt;/a&gt;1. c_str()：生成一个const char*指针，指向以空字符终止的数组。&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;char* c=new char[20];
+string s=&amp;quot;1234&amp;quot;;
+//c = s.c_str(); 
+strcpy(c,s.c_str());
+cout&amp;lt;&amp;lt;c&amp;lt;&amp;lt;endl; //输出：1234
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;2-将字符串转换为数字&quot;&gt;&lt;a href=&quot;#2-将字符串转换为数字&quot; class=&quot;headerlink&quot; title=&quot;2.将字符串转换为数字&quot;&gt;&lt;/a&gt;2.将字符串转换为数字&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;string source = &amp;quot;123&amp;quot;;
+atoi(source.c_str());
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;Note-带符号的整数n，进行-1乘n操作时，小心n-2147483648，这时-1-n会溢出，可以-n-1；&quot;&gt;&lt;a href=&quot;#Note-带符号的整数n，进行-1乘n操作时，小心n-2147483648，这时-1-n会溢出，可以-n-1；&quot; class=&quot;h
+    
+    </summary>
+    
+    
+      <category term="c++" scheme="http://yoursite.com/tags/c/"/>
+    
+      <category term="snippet" scheme="http://yoursite.com/tags/snippet/"/>
+    
+  </entry>
   
   <entry>
     <title>c++ vector容器常用操作</title>

@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a>
+						<a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,138 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-Hadoop-hive-分区partition" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/15/Hadoop-hive-分区partition/" class="article-date">
+  	<time datetime="2016-06-15T07:23:34.000Z" itemprop="datePublished">2016-06-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/15/Hadoop-hive-分区partition/">Hadoop hive 分区partition</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Hive是啥子？"><a href="#Hive是啥子？" class="headerlink" title="Hive是啥子？"></a>Hive是啥子？</h3><ol>
+<li>Hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。（将输入的hql语句解析成待提交的job）</li>
+<li>本质是将SQL转换为MapReduce程序</li>
+</ol>
+<h3 id="Hive-特点"><a href="#Hive-特点" class="headerlink" title="Hive 特点"></a>Hive 特点</h3><ol>
+<li>可扩展： 可自由扩展集群规模，一般无需重启服务</li>
+<li>延展性： 支持自定义函数</li>
+<li>容错性： 良好的容错性，节点出现问题SQL仍可完成</li>
+</ol>
+<h3 id="hive与Hadoop的关系"><a href="#hive与Hadoop的关系" class="headerlink" title="hive与Hadoop的关系"></a>hive与Hadoop的关系</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop/">hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hive/">hive</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/06/15/Hadoop-hive-分区partition/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-c-snippets" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/10/c-snippets/" class="article-date">
+  	<time datetime="2016-05-10T14:50:52.000Z" itemprop="datePublished">2016-05-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/10/c-snippets/">c++ snippets</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Note-带符号的整数n，进行-1乘n操作时，小心n-2147483648，这时-1-n会溢出，可以-n-1；"><a href="#Note-带符号的整数n，进行-1乘n操作时，小心n-2147483648，这时-1-n会溢出，可以-n-1；" class="headerlink" title="Note: 带符号的整数n，进行-1乘n操作时，小心n=-2147483648，这时-1*n会溢出，可以 n++-1；"></a>Note: 带符号的整数n，进行-1乘n操作时，小心n=-2147483648，这时-1*n会溢出，可以 n++-1；</h4><h4 id="1-c-str-：生成一个const-char-指针，指向以空字符终止的数组。"><a href="#1-c-str-：生成一个const-char-指针，指向以空字符终止的数组。" class="headerlink" title="1. c_str()：生成一个const char*指针，指向以空字符终止的数组。"></a>1. c_str()：生成一个const char*指针，指向以空字符终止的数组。</h4><pre><code>char* c=new char[20];
+string s=&quot;1234&quot;;
+//c = s.c_str(); 
+strcpy(c,s.c_str());
+cout&lt;&lt;c&lt;&lt;endl; //输出：1234
+</code></pre><h4 id="2-将字符串转换为数字"><a href="#2-将字符串转换为数字" class="headerlink" title="2.将字符串转换为数字"></a>2.将字符串转换为数字</h4><pre><code>string source = &quot;123&quot;;
+atoi(source.c_str());
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/snippet/">snippet</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-c-vector容器常用操作" class="article article-type-post" itemscope itemprop="blogPost">
   

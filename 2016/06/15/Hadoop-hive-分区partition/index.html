@@ -4,18 +4,47 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>小冉是不是该睡觉了</title>
+  <title>Hadoop hive 分区partition | 小冉是不是该睡觉了</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小冉是不是该睡觉了">
-<meta property="og:url" content="http://yoursite.com/404.html">
+  <meta name="description" content="Hive是啥子？
+Hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。（将输入的hql语句解析成待提交的job）
+本质是将SQL转换为MapReduce程序
+
+Hive 特点
+可扩展： 可自由扩展集群规模，一般无需重启服务
+延展性： 支持自定义函数
+容错性： 良好的容错性，节点出现问题SQL仍可完成
+
+hive与Hadoop的关系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop hive 分区partition">
+<meta property="og:url" content="http://yoursite.com/2016/06/15/Hadoop-hive-分区partition/index.html">
 <meta property="og:site_name" content="小冉是不是该睡觉了">
-<meta property="og:description">
-<meta property="og:updated_time" content="2016-04-26T02:00:20.000Z">
+<meta property="og:description" content="Hive是啥子？
+Hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。（将输入的hql语句解析成待提交的job）
+本质是将SQL转换为MapReduce程序
+
+Hive 特点
+可扩展： 可自由扩展集群规模，一般无需重启服务
+延展性： 支持自定义函数
+容错性： 良好的容错性，节点出现问题SQL仍可完成
+
+hive与Hadoop的关系">
+<meta property="og:image" content="http://yoursite.com/hadoop-hive.jpg">
+<meta property="og:updated_time" content="2016-06-15T08:09:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小冉是不是该睡觉了">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Hadoop hive 分区partition">
+<meta name="twitter:description" content="Hive是啥子？
+Hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。（将输入的hql语句解析成待提交的job）
+本质是将SQL转换为MapReduce程序
+
+Hive 特点
+可扩展： 可自由扩展集群规模，一般无需重启服务
+延展性： 支持自定义函数
+容错性： 良好的容错性，节点出现问题SQL仍可完成
+
+hive与Hadoop的关系">
+<meta name="twitter:image" content="http://yoursite.com/hadoop-hive.jpg">
   
     <link rel="alternative" href="/atom.xml" title="小冉是不是该睡觉了" type="application/atom+xml">
   
@@ -191,11 +220,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Hadoop-hive-分区partition" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/404.html" class="article-date">
-  	<time datetime="2016-04-26T02:00:20.000Z" itemprop="datePublished">2016-04-26</time>
+      <a href="/2016/06/15/Hadoop-hive-分区partition/" class="article-date">
+  	<time datetime="2016-06-15T07:23:34.000Z" itemprop="datePublished">2016-06-15</time>
 </a>
     </div>
   
@@ -204,9 +233,71 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hadoop hive 分区partition
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop/">hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hive/">hive</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <!DOCTYPE HTML> <html> <head> <meta http-equiv="content-type" content="text/html;charset=utf-8;"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <meta name="robots" content="all"> <meta name="robots" content="index,follow"> </head> <body> <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" homepageurl="your site url " homepagename="回到我的主页"></script> </body> </html>
+        <h3 id="Hive是啥子？"><a href="#Hive是啥子？" class="headerlink" title="Hive是啥子？"></a>Hive是啥子？</h3><ol>
+<li>Hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。（将输入的hql语句解析成待提交的job）</li>
+<li>本质是将SQL转换为MapReduce程序</li>
+</ol>
+<h3 id="Hive-特点"><a href="#Hive-特点" class="headerlink" title="Hive 特点"></a>Hive 特点</h3><ol>
+<li>可扩展： 可自由扩展集群规模，一般无需重启服务</li>
+<li>延展性： 支持自定义函数</li>
+<li>容错性： 良好的容错性，节点出现问题SQL仍可完成</li>
+</ol>
+<h3 id="hive与Hadoop的关系"><a href="#hive与Hadoop的关系" class="headerlink" title="hive与Hadoop的关系"></a>hive与Hadoop的关系</h3><a id="more"></a>
+<p><img src="hadoop-hive.jpg" alt="hive与hadoop的关系"></p>
+<h3 id="关于分区partition的概念"><a href="#关于分区partition的概念" class="headerlink" title="关于分区partition的概念"></a>关于分区partition的概念</h3><ol>
+<li>在Hive Select语句查询中一般会扫描整个表内容，会消耗很多时间做没必要的工作。有时候只需要扫描表中关心的一部分数据，因此建表时引入了partition概念</li>
+<li>分区表指的是在创建表时指定的partition的分区空间</li>
+<li>如果需要创建有分区的表，需要在create表的时候调用可选参数partitioned by，</li>
+<li>一个表可以拥有一个或者多个分区，每个分区以文件夹的形式单独存在表文件夹的目录下。</li>
+<li>分区是以字段的形式在表结构中存在，通过describe table命令可以查看到字段存在，但是该字段不存放实际的数据内容，仅仅是分区的表示。</li>
+</ol>
+<h4 id="分区建立"><a href="#分区建立" class="headerlink" title="分区建立"></a>分区建立</h4><p> 分区建表分为2种，一种是单分区，也就是说在表文件夹目录下只有一级文件夹目录。另外一种是多分区，表文件夹下出现多文件夹嵌套模式。</p>
+<p>  a. 单分区建表语句：</p>
+<pre><code>create table day_table (id int, content string) partitioned by (dt string);单分区表，按天分区，在表结构中存在id，content，dt三列。
+</code></pre><p>  b. 双分区建表语句：</p>
+<pre><code>create table day_hour_table (id int, content string) partitioned by (dt string, hour string);双分区表，按天和小时分区，在表结构中新增加了dt和hour两列。
+</code></pre><h4 id="添加分区"><a href="#添加分区" class="headerlink" title="添加分区"></a>添加分区</h4><pre><code>ALTER TABLE day_table ADD PARTITION (dt=&apos;2008-08-08&apos;, hour=&apos;08&apos;) location &apos;/path/pv1.txt&apos; PARTITION (dt=&apos;2008-08-08&apos;, hour=&apos;09&apos;) location &apos;/path/pv2.txt&apos;;    
+</code></pre><h4 id="删除分区"><a href="#删除分区" class="headerlink" title="删除分区"></a>删除分区</h4><pre><code>ALTER TABLE day_hour_table DROP PARTITION (dt=&apos;2008-08-08&apos;, hour=&apos;09&apos;);    
+</code></pre><h4 id="数据加载进分区"><a href="#数据加载进分区" class="headerlink" title="数据加载进分区"></a>数据加载进分区</h4><pre><code>LOAD DATA INPATH &apos;/user/pv.txt&apos; INTO TABLE day_hour_table PARTITION(dt=&apos;2008-08- 08&apos;, hour=&apos;08&apos;);
+
+LOAD DATA local INPATH &apos;/user/hua/*&apos; INTO TABLE day_hour partition(dt=&apos;2010-07- 07&apos;);
+</code></pre><p>   当数据被加载至表中时，不会对数据进行任何转换。Load操作只是将数据复制至Hive表对应的位置。数据加载时在表下自动创建一个目录，文件存放在该分区下。</p>
+<h4 id="基于分区的查询语句"><a href="#基于分区的查询语句" class="headerlink" title="基于分区的查询语句"></a>基于分区的查询语句</h4><pre><code>SELECT day_table.* FROM day_table WHERE day_table.dt&gt;= &apos;2008-08-08&apos;;
+</code></pre><h4 id="查看表的分区"><a href="#查看表的分区" class="headerlink" title="查看表的分区"></a>查看表的分区</h4><pre><code>hive&gt; 
+show partitions day_hour_table; 
+
+OK 
+dt=2008-08-08/hour=08 
+dt=2008-08-08/hour=09 
+dt=2008-08-09/hour=09;
+...
+</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>总的说来partition就是辅助查询，缩小查询范围，加快数据的检索速度和对数据按照一定的规格和条件进行管理。</li>
+</ol>
 
       
     </div>
@@ -214,6 +305,16 @@
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/10/c-snippets/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++ snippets</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -243,7 +344,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="undefined" data-title="" data-url="http://yoursite.com/404.html"></div>
+	<div class="ds-thread" data-thread-key="Hadoop-hive-分区partition" data-title="Hadoop hive 分区partition" data-url="http://yoursite.com/2016/06/15/Hadoop-hive-分区partition/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -287,7 +388,7 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
