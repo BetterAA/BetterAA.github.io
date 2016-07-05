@@ -4,17 +4,29 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Tag: test | 小冉是不是该睡觉了</title>
+  <title>JAVA异常：Comparison method violates its general contract | 小冉是不是该睡觉了</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="科学证明：长期熬夜容易变sb">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小冉是不是该睡觉了">
-<meta property="og:url" content="http://yoursite.com/tags/test/index.html">
+  <meta name="description" content="异常描述java.lang.IllegalArgumentException: Comparison method violates its general contract!
+异常举例Collections.sort(list, new Comparator&amp;lt;Integer&amp;gt;() {  
+@Override  
+    public int compare(Integer o1, I">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA异常：Comparison method violates its general contract">
+<meta property="og:url" content="http://yoursite.com/2016/07/05/JAVA异常：Comparison-method-violates-its-general-contract/index.html">
 <meta property="og:site_name" content="小冉是不是该睡觉了">
-<meta property="og:description" content="科学证明：长期熬夜容易变sb">
+<meta property="og:description" content="异常描述java.lang.IllegalArgumentException: Comparison method violates its general contract!
+异常举例Collections.sort(list, new Comparator&amp;lt;Integer&amp;gt;() {  
+@Override  
+    public int compare(Integer o1, I">
+<meta property="og:image" content="http://yoursite.com/compare.png">
+<meta property="og:updated_time" content="2016-07-05T04:23:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小冉是不是该睡觉了">
-<meta name="twitter:description" content="科学证明：长期熬夜容易变sb">
+<meta name="twitter:title" content="JAVA异常：Comparison method violates its general contract">
+<meta name="twitter:description" content="异常描述java.lang.IllegalArgumentException: Comparison method violates its general contract!
+异常举例Collections.sort(list, new Comparator&amp;lt;Integer&amp;gt;() {  
+@Override  
+    public int compare(Integer o1, I">
+<meta name="twitter:image" content="http://yoursite.com/compare.png">
   
     <link rel="alternative" href="/atom.xml" title="小冉是不是该睡觉了" type="application/atom+xml">
   
@@ -190,53 +202,136 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-JAVA异常：Comparison-method-violates-its-general-contract" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/04/26/Done/" class="archive-article-date">
-  	<time datetime="2016-04-26T08:10:01.000Z" itemprop="datePublished">Apr 26</time>
+    <div class="article-meta">
+      <a href="/2016/07/05/JAVA异常：Comparison-method-violates-its-general-contract/" class="article-date">
+  	<time datetime="2016-07-05T04:00:10.000Z" itemprop="datePublished">2016-07-05</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/26/Done/">Done!</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JAVA异常：Comparison method violates its general contract
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/">test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常/">异常</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+      </div>
+      
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="异常描述"><a href="#异常描述" class="headerlink" title="异常描述"></a>异常描述</h2><p>java.lang.IllegalArgumentException: Comparison method violates its general contract!</p>
+<h2 id="异常举例"><a href="#异常举例" class="headerlink" title="异常举例"></a>异常举例</h2><pre><code>Collections.sort(list, new Comparator&lt;Integer&gt;() {  
+@Override  
+    public int compare(Integer o1, Integer o2) {  
+        return o1 &gt; o2 ? 1 : -1;// 错误的方式  
+    }  
+});
+</code></pre><h2 id="异常原因"><a href="#异常原因" class="headerlink" title="异常原因"></a>异常原因</h2><p>JDK7的sort函数实现变了，与旧版本的不同，存在兼容问题，可以查看下自己的compare函数实现有木有问题<br><a id="more"></a><br>新版本中对比较有约束条件，如果违反了约束条件就会抛出llegalArgumentException异常，JDK6中则忽略了这种情况，那么新的约束是啥子？<br><img src="compare.png" alt="compare"></p>
+<ol>
+<li>sgn(compare(x, y)) == -sgn(compare(y, x))</li>
+<li>((compare(x, y)&gt;0) &amp;&amp; (compare(y, z)&gt;0)) implies compare(x, z)&gt;0</li>
+<li>compare(x, y)==0 implies that sgn(compare(x, z))==sgn(compare(y, z)) for all z</li>
+</ol>
+<p>因此，上面的异常举例就有问题了</p>
+<pre><code>return x &gt; y ? 1 : -1; 
+</code></pre><p>当x == y时，sgn(compare(x, y))  = -1，-sgn(compare(y, x)) = 1，这违背了sgn(compare(x, y)) == -sgn(compare(y, x))约束。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ol>
+<li>JVM启动参数 增加 -Djava.util.Arrays.useLegacyMergeSort=true</li>
+<li>改动compare函数</li>
+</ol>
+<pre><code>Collections.sort(list, new Comparator&lt;Integer&gt;() {  
+@Override  
+public int compare(Integer o1, Integer o2) {  
+// return o1 &gt; o2 ? 1 : -1;  
+return o1.compareTo(o2);// 正确的方式 
+//或者 return  o1 &gt;= o2 ? 1 : -1; 
+}  
+}); 
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/15/Hadoop-hive-分区partition/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hadoop hive 分区partition</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="JAVA异常：Comparison-method-violates-its-general-contract" data-title="JAVA异常：Comparison method violates its general contract" data-url="http://yoursite.com/2016/07/05/JAVA异常：Comparison-method-violates-its-general-contract/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -262,9 +357,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}

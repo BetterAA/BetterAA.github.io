@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a>
+						<a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/异常/" style="font-size: 10px;">异常</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,73 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-JAVA异常：Comparison-method-violates-its-general-contract" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/05/JAVA异常：Comparison-method-violates-its-general-contract/" class="article-date">
+  	<time datetime="2016-07-05T04:00:10.000Z" itemprop="datePublished">2016-07-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/05/JAVA异常：Comparison-method-violates-its-general-contract/">JAVA异常：Comparison method violates its general contract</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="异常描述"><a href="#异常描述" class="headerlink" title="异常描述"></a>异常描述</h2><p>java.lang.IllegalArgumentException: Comparison method violates its general contract!</p>
+<h2 id="异常举例"><a href="#异常举例" class="headerlink" title="异常举例"></a>异常举例</h2><pre><code>Collections.sort(list, new Comparator&lt;Integer&gt;() {  
+@Override  
+    public int compare(Integer o1, Integer o2) {  
+        return o1 &gt; o2 ? 1 : -1;// 错误的方式  
+    }  
+});
+</code></pre><h2 id="异常原因"><a href="#异常原因" class="headerlink" title="异常原因"></a>异常原因</h2><p>JDK7的sort函数实现变了，与旧版本的不同，存在兼容问题，可以查看下自己的compare函数实现有木有问题<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常/">异常</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/05/JAVA异常：Comparison-method-violates-its-general-contract/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-Hadoop-hive-分区partition" class="article article-type-post" itemscope itemprop="blogPost">
   
