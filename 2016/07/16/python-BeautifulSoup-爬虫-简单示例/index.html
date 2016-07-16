@@ -4,27 +4,51 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>c++ vector容器常用操作 | 小冉是不是该睡觉了</title>
+  <title>python+BeautifulSoup 爬虫 正则 简单示例 | 小冉是不是该睡觉了</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。Note：
-尽量使用reserve来减少不必要的内存分配次数。
+  <meta name="description" content="##这里是直接用源码+重要注释
+#-*- coding:utf-8 -*-
+from urllib import urlopen
+from bs4 import BeautifulSoup
+import requests
+import re
+import time
 
-原则：尽量使用empty()而不是size()==0 来判断容器是否为空">
+url = &amp;quot;&amp;quot;
+domain = &amp;quot;&amp;quot;
+
+sessions = requests.Sess">
 <meta property="og:type" content="article">
-<meta property="og:title" content="c++ vector容器常用操作">
-<meta property="og:url" content="http://yoursite.com/2016/05/09/c-vector容器常用操作/index.html">
+<meta property="og:title" content="python+BeautifulSoup 爬虫 正则 简单示例">
+<meta property="og:url" content="http://yoursite.com/2016/07/16/python-BeautifulSoup-爬虫-简单示例/index.html">
 <meta property="og:site_name" content="小冉是不是该睡觉了">
-<meta property="og:description" content="其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。Note：
-尽量使用reserve来减少不必要的内存分配次数。
+<meta property="og:description" content="##这里是直接用源码+重要注释
+#-*- coding:utf-8 -*-
+from urllib import urlopen
+from bs4 import BeautifulSoup
+import requests
+import re
+import time
 
-原则：尽量使用empty()而不是size()==0 来判断容器是否为空">
-<meta property="og:updated_time" content="2016-05-08T17:03:04.000Z">
+url = &amp;quot;&amp;quot;
+domain = &amp;quot;&amp;quot;
+
+sessions = requests.Sess">
+<meta property="og:updated_time" content="2016-07-16T14:01:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="c++ vector容器常用操作">
-<meta name="twitter:description" content="其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。Note：
-尽量使用reserve来减少不必要的内存分配次数。
+<meta name="twitter:title" content="python+BeautifulSoup 爬虫 正则 简单示例">
+<meta name="twitter:description" content="##这里是直接用源码+重要注释
+#-*- coding:utf-8 -*-
+from urllib import urlopen
+from bs4 import BeautifulSoup
+import requests
+import re
+import time
 
-原则：尽量使用empty()而不是size()==0 来判断容器是否为空">
+url = &amp;quot;&amp;quot;
+domain = &amp;quot;&amp;quot;
+
+sessions = requests.Sess">
   
     <link rel="alternative" href="/atom.xml" title="小冉是不是该睡觉了" type="application/atom+xml">
   
@@ -200,11 +224,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-c-vector容器常用操作" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-python-BeautifulSoup-爬虫-简单示例" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/09/c-vector容器常用操作/" class="article-date">
-  	<time datetime="2016-05-08T16:20:46.000Z" itemprop="datePublished">2016-05-09</time>
+      <a href="/2016/07/16/python-BeautifulSoup-爬虫-简单示例/" class="article-date">
+  	<time datetime="2016-07-16T13:52:52.000Z" itemprop="datePublished">2016-07-16</time>
 </a>
     </div>
   
@@ -217,7 +241,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      c++ vector容器常用操作
+      python+BeautifulSoup 爬虫 正则 简单示例
     </h1>
   
 
@@ -226,7 +250,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vector/">vector</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BeautifulSoup/">BeautifulSoup</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
 	</div>
 
         
@@ -237,62 +261,63 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。"><a href="#其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。" class="headerlink" title="其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。"></a>其实这东西从来都是屯在我的EverNote里的，今天又用到了，还是整理出来吧。。</h2><h4 id="Note："><a href="#Note：" class="headerlink" title="Note："></a>Note：</h4><ol>
-<li><p>尽量使用reserve来减少不必要的内存分配次数。</p>
-</li>
-<li><p>原则：尽量使用empty()而不是size()==0 来判断容器是否为空</p>
-</li>
-</ol>
-<a id="more"></a>
-<h4 id="0x00-vector-的初始化"><a href="#0x00-vector-的初始化" class="headerlink" title="0x00 vector 的初始化"></a>0x00 vector 的初始化</h4><pre><code>vector&lt;int&gt; v2(10); //初始化size为10可以避免数组动态增长的时候不断的分配内存
-//或者vec.reserve(10); 功能同上
+        <p>##这里是直接用源码+重要注释</p>
+<pre><code>#-*- coding:utf-8 -*-
+from urllib import urlopen
+from bs4 import BeautifulSoup
+import requests
+import re
+import time
 
-int  v1[10] = {0,1,0,0,3,0,0,4,4,4};
-vector&lt;int&gt; v3(&amp;v1[0],&amp;v1[9]);//原始数组的元素指针可以作为迭代器来使用
-</code></pre><h4 id="0x01-使用迭代器访问元素"><a href="#0x01-使用迭代器访问元素" class="headerlink" title="0x01. 使用迭代器访问元素"></a>0x01. 使用迭代器访问元素</h4><pre><code>vector&lt;int&gt;::iterator it;
+url = &quot;&quot;
+domain = &quot;&quot;
 
-for(it=vec.begin();it!=vec.end();it++)
+sessions = requests.Session()
+#注意; 这里没有对编码处理，输出中文字符乱码。。decode（“utf-8”）
+</code></pre><a id="more"></a>
+<pre><code>#还有别的header也可以加
+header = {&quot;User-Agent&quot;:&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12&quot;}
+req = sessions.get(url,headers=header)
 
-cout&lt;&lt;*it&lt;&lt;endl;
-</code></pre><h4 id="0x02-和其他容器都类似，支持begin和end获取首尾指针"><a href="#0x02-和其他容器都类似，支持begin和end获取首尾指针" class="headerlink" title="0x02 和其他容器都类似，支持begin和end获取首尾指针"></a>0x02 和其他容器都类似，支持begin和end获取首尾指针</h4><pre><code>//传入sort函数
-sort(vec.begin(), vec.end(), Cmp);
-</code></pre><h4 id="0x03-获取首尾元素和大小情况"><a href="#0x03-获取首尾元素和大小情况" class="headerlink" title="0x03 获取首尾元素和大小情况"></a>0x03 获取首尾元素和大小情况</h4><pre><code>vec.front(); vec.back(); vec.size()； vec.empty();
-</code></pre><h4 id="0x04-元素的插入和删除"><a href="#0x04-元素的插入和删除" class="headerlink" title="0x04 元素的插入和删除"></a>0x04 元素的插入和删除</h4><pre><code>//在尾部增加和删除元素
+bsObj = BeautifulSoup(req.text)
+#可以直接找tbody，省的再先找table，但是这样没有那样稳妥
+#findAll和find函数都是的第一个都是标签的类型，如p，div，后面的{}是属性集合
+#第一个标签类型也可以不填，那就都找
+table_tbody = bsObj.find(&quot;tbody&quot;,{&quot;style&quot;:&quot;table-layout:fixed;&quot;})
+trs = table_tbody.findAll(&quot;tr&quot;,{&quot;class&quot;:&quot;tr3 t_one&quot;})
 
-vec.push_back();
+subURLs = []
+for tr in trs:
+_url = tr.find(&quot;a&quot;,{&quot;target&quot;:&quot;_blank&quot;}).attrs[&quot;href”]  #找到标签后用attrs可以找到属性
+subURLs.append(domain+_url)
 
-vec.pop_back(); //可用来模仿stack和quene
+#print &apos;\n&apos;.join(subURLs)
+#边爬数据边写，避免中途异常后无数据
+out = open(&quot;./out&quot;,&quot;w&quot;)
 
-vec.clear() ; //清除元素
+real_url = []
+for _url in subURLs:
+#记得异常处理
+try:
+    #这里避免请求太频繁，因此每次暂停2秒
+    time.sleep(2)
+    print &apos;In url: &apos;+_url
+    _req = sessions.get(_url,headers= header)
+    _bsObj = BeautifulSoup(_req.text)
+    _a = _bsObj.find(&quot;div&quot;,{&quot;class&quot;:&quot;tpc_content do_not_catch&quot;}).find(&quot;a&quot;,{&quot;style&quot;:&quot;cursor:pointer&quot;})
+#_a.get_text() 可以得到a标签的文本
+#（.*?）是正则里面的东西，可以匹配全部的内容，前面\’是’转义，此处我们的待匹配字符串是.src=.....’” style..
+#我们要取到的是src后面...
+    #real_url.append(re.findall(r&apos;.src=\&apos;(.*?)\&apos;\&quot; style&apos;,str(_a))[0])  #转成字符串str处理
+    out.write(re.findall(r&apos;.src=\&apos;(.*?)\&apos;\&quot; style&apos;,str(_a))[0]+&apos;\n&apos;)
+except:
+    print &apos;爬取失败&apos;
+finally:
+    out.close()
 
-vec.insert(vec.begin()+i,a);在第i+1个元素前面插入a;
-
-// erase the 6th element
-myvector.erase (myvector.begin()+5);
-
-// erase the first 3 elements:
-myvector.erase (myvector.begin(),myvector.begin()+3); //其实一般都是左闭右开 &lt;=  &lt;
-</code></pre><h4 id="0x05-常用算法"><a href="#0x05-常用算法" class="headerlink" title="0x05 常用算法"></a>0x05 常用算法</h4><pre><code>//1. sort
-
-sort(vec.begin(),vec.end());(默认是按升序排列,即从小到大).
-
-//可以通过重写排序比较函数按照降序比较，如下：
-
-//定义排序比较函数：
-
-bool Comp(const int &amp;a,const int &amp;b)
-{
-    return a&gt;b;
-}
-//调用时:
-sort(vec.begin(),vec.end(),Comp)，这样就降序排序。其他类型的一样，    总之最后返回bool值就行
-
-//2. reverse
-reverse(vec.begin(),vec.end());将元素翻转
-</code></pre><h3 id="PS-发现这里的文档很详细，还有示例代码参考，这里没有的可以参考下："><a href="#PS-发现这里的文档很详细，还有示例代码参考，这里没有的可以参考下：" class="headerlink" title="PS: 发现这里的文档很详细，还有示例代码参考，这里没有的可以参考下："></a>PS: 发现这里的文档很详细，还有示例代码参考，这里没有的可以参考下：</h3><p><a href="http://www.cplusplus.com/reference/vector/vector/" target="_blank" rel="external">www.cplusplus.com/reference/vector/vector</a></p>
-<hr>
-<p>晚安 ~~</p>
-
+out.close()
+#out.write(&apos;\n&apos;.join(real_url))
+</code></pre>
       
     </div>
     
@@ -301,18 +326,9 @@ reverse(vec.begin(),vec.end());将元素翻转
     
 <nav id="article-nav">
   
-    <a href="/2016/05/10/c-snippets/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          c++ snippets
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/04/hexo本地博客系统以及github-page建博客流程/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo本地博客系统以及github page建博客流程</div>
+    <a href="/2016/07/05/JAVA异常：Comparison-method-violates-its-general-contract/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JAVA异常：Comparison method violates its general contract</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -347,7 +363,7 @@ reverse(vec.begin(),vec.end());将元素翻转
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="c-vector容器常用操作" data-title="c++ vector容器常用操作" data-url="http://yoursite.com/2016/05/09/c-vector容器常用操作/"></div>
+	<div class="ds-thread" data-thread-key="python-BeautifulSoup-爬虫-简单示例" data-title="python+BeautifulSoup 爬虫 正则 简单示例" data-url="http://yoursite.com/2016/07/16/python-BeautifulSoup-爬虫-简单示例/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

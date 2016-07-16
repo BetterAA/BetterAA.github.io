@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-05T04:23:09.000Z</updated>
+  <updated>2016-07-16T14:01:01.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,101 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python+BeautifulSoup 爬虫 正则 简单示例</title>
+    <link href="http://yoursite.com/2016/07/16/python-BeautifulSoup-%E7%88%AC%E8%99%AB-%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/"/>
+    <id>http://yoursite.com/2016/07/16/python-BeautifulSoup-爬虫-简单示例/</id>
+    <published>2016-07-16T13:52:52.000Z</published>
+    <updated>2016-07-16T14:01:01.000Z</updated>
+    
+    <content type="html">&lt;p&gt;##这里是直接用源码+重要注释&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#-*- coding:utf-8 -*-
+from urllib import urlopen
+from bs4 import BeautifulSoup
+import requests
+import re
+import time
+
+url = &amp;quot;&amp;quot;
+domain = &amp;quot;&amp;quot;
+
+sessions = requests.Session()
+#注意; 这里没有对编码处理，输出中文字符乱码。。decode（“utf-8”）
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;pre&gt;&lt;code&gt;#还有别的header也可以加
+header = {&amp;quot;User-Agent&amp;quot;:&amp;quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12&amp;quot;}
+req = sessions.get(url,headers=header)
+
+bsObj = BeautifulSoup(req.text)
+#可以直接找tbody，省的再先找table，但是这样没有那样稳妥
+#findAll和find函数都是的第一个都是标签的类型，如p，div，后面的{}是属性集合
+#第一个标签类型也可以不填，那就都找
+table_tbody = bsObj.find(&amp;quot;tbody&amp;quot;,{&amp;quot;style&amp;quot;:&amp;quot;table-layout:fixed;&amp;quot;})
+trs = table_tbody.findAll(&amp;quot;tr&amp;quot;,{&amp;quot;class&amp;quot;:&amp;quot;tr3 t_one&amp;quot;})
+
+subURLs = []
+for tr in trs:
+_url = tr.find(&amp;quot;a&amp;quot;,{&amp;quot;target&amp;quot;:&amp;quot;_blank&amp;quot;}).attrs[&amp;quot;href”]  #找到标签后用attrs可以找到属性
+subURLs.append(domain+_url)
+
+#print &amp;apos;\n&amp;apos;.join(subURLs)
+#边爬数据边写，避免中途异常后无数据
+out = open(&amp;quot;./out&amp;quot;,&amp;quot;w&amp;quot;)
+
+real_url = []
+for _url in subURLs:
+#记得异常处理
+try:
+    #这里避免请求太频繁，因此每次暂停2秒
+    time.sleep(2)
+    print &amp;apos;In url: &amp;apos;+_url
+    _req = sessions.get(_url,headers= header)
+    _bsObj = BeautifulSoup(_req.text)
+    _a = _bsObj.find(&amp;quot;div&amp;quot;,{&amp;quot;class&amp;quot;:&amp;quot;tpc_content do_not_catch&amp;quot;}).find(&amp;quot;a&amp;quot;,{&amp;quot;style&amp;quot;:&amp;quot;cursor:pointer&amp;quot;})
+#_a.get_text() 可以得到a标签的文本
+#（.*?）是正则里面的东西，可以匹配全部的内容，前面\’是’转义，此处我们的待匹配字符串是.src=.....’” style..
+#我们要取到的是src后面...
+    #real_url.append(re.findall(r&amp;apos;.src=\&amp;apos;(.*?)\&amp;apos;\&amp;quot; style&amp;apos;,str(_a))[0])  #转成字符串str处理
+    out.write(re.findall(r&amp;apos;.src=\&amp;apos;(.*?)\&amp;apos;\&amp;quot; style&amp;apos;,str(_a))[0]+&amp;apos;\n&amp;apos;)
+except:
+    print &amp;apos;爬取失败&amp;apos;
+finally:
+    out.close()
+
+out.close()
+#out.write(&amp;apos;\n&amp;apos;.join(real_url))
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;##这里是直接用源码+重要注释&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#-*- coding:utf-8 -*-
+from urllib import urlopen
+from bs4 import BeautifulSoup
+import requests
+import re
+import time
+
+url = &amp;quot;&amp;quot;
+domain = &amp;quot;&amp;quot;
+
+sessions = requests.Session()
+#注意; 这里没有对编码处理，输出中文字符乱码。。decode（“utf-8”）
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="爬虫" scheme="http://yoursite.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="BeautifulSoup" scheme="http://yoursite.com/tags/BeautifulSoup/"/>
+    
+      <category term="正则" scheme="http://yoursite.com/tags/%E6%AD%A3%E5%88%99/"/>
+    
+  </entry>
   
   <entry>
     <title>JAVA异常：Comparison method violates its general contract</title>
