@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-19T08:46:20.000Z</updated>
+  <updated>2016-07-19T09:38:51.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,94 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《python网络数据采集》学习笔记-NLTK</title>
+    <link href="http://yoursite.com/2016/07/19/%E3%80%8Apython%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-NLTK/"/>
+    <id>http://yoursite.com/2016/07/19/《python网络数据采集》学习笔记-NLTK/</id>
+    <published>2016-07-19T09:23:59.000Z</published>
+    <updated>2016-07-19T09:38:51.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;《python网络数据采集》-一书中自然语言处理基础学习&quot;&gt;&lt;a href=&quot;#《python网络数据采集》-一书中自然语言处理基础学习&quot; class=&quot;headerlink&quot; title=&quot;《python网络数据采集》 一书中自然语言处理基础学习&quot;&gt;&lt;/a&gt;《python网络数据采集》 一书中自然语言处理基础学习&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;# from nltk import word_tokenize
+from nltk import Text
+#用NLTK做统计分析一般都是从Text对象开始的
+tokens = word_tokenize(&amp;quot;here is some not very interesting text is&amp;quot;)
+text = Text(tokens)
+#Text对象的长度就是 单词的个数
+print len(text)
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot; &quot;&gt;&lt;/a&gt; &lt;/h3&gt;&lt;pre&gt;&lt;code&gt;from nltk import FreqDist #计算词频
+from nltk.book import text6 #用的是自带的基本书，一共有10本，这里用第6本
+fdist = FreqDist(text6)
+fdist.most_common(5)  #直接找出按照词频排前10的单词
+fdist[&amp;quot;Grail&amp;quot;]        #也可以直接找出某个词的词频
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- more --&gt;
+&lt;h3 id=&quot;-1&quot;&gt;&lt;a href=&quot;#-1&quot; class=&quot;headerlink&quot; title=&quot; &quot;&gt;&lt;/a&gt; &lt;/h3&gt;&lt;pre&gt;&lt;code&gt;#直接调用n-gram模型
+from nltk import ngrams
+fourgrams = ngrams(text6,4)
+#词频类也可以对n-gram词典进行统计词频
+fourgramsDist = FreqDist(fourgrams)
+#直接查找这个4序列的频率
+fourgramsDist[(&amp;quot;father&amp;quot;,&amp;quot;smelt&amp;quot;,&amp;quot;of&amp;quot;,&amp;quot;elderberries&amp;quot;)] #输出1，表示出现了一次
+for fourgram in fourgrams:
+if fourgram[0] == &amp;quot;cocount&amp;quot;: #直接判断4-gram列表里面的第一个词是cocount的
+    print(fourgram)    
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- more --&gt;
+&lt;h3 id=&quot;-2&quot;&gt;&lt;a href=&quot;#-2&quot; class=&quot;headerlink&quot; title=&quot; &quot;&gt;&lt;/a&gt; &lt;/h3&gt;&lt;pre&gt;&lt;code&gt;#词性分析
+from nltk import pos_tag
+text = word_tokenize(&amp;quot;The dust was thick so he has to dust&amp;quot;)
+pos_tag(text)  #是一个列表[] ,列表里面的每一个都是一个tuple二元组
+#DT，NN等都是词性标记的缩写，在《python网络数据采集》一书的P116
+#这里dust出现了两次，词性不同，识别方式是通过形式语言的“上下文无关文法”，形式语言的上下文无关文法确定的是一个词性后面可以跟哪些词性
+
+//OUT
+[(&amp;apos;The&amp;apos;, &amp;apos;DT&amp;apos;),
+(&amp;apos;dust&amp;apos;, &amp;apos;NN&amp;apos;),
+(&amp;apos;was&amp;apos;, &amp;apos;VBD&amp;apos;),    
+(&amp;apos;thick&amp;apos;, &amp;apos;RB&amp;apos;),
+(&amp;apos;so&amp;apos;, &amp;apos;RB&amp;apos;), 
+(&amp;apos;he&amp;apos;, &amp;apos;PRP&amp;apos;),
+(&amp;apos;has&amp;apos;, &amp;apos;VBZ&amp;apos;),
+(&amp;apos;to&amp;apos;, &amp;apos;TO&amp;apos;),
+(&amp;apos;dust&amp;apos;, &amp;apos;VB&amp;apos;)]
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- more --&gt;
+&lt;h2 id=&quot;-3&quot;&gt;&lt;a href=&quot;#-3&quot; class=&quot;headerlink&quot; title=&quot; &quot;&gt;&lt;/a&gt; &lt;/h2&gt;&lt;pre&gt;&lt;code&gt;#对于词性的应用，找出一段文字中作为名词而不是动词的“google”
+from nltk import sent_tokenize
+#sent_tokenize 用来将一段话分解成句子， 而word_tokenize是将一句话分词
+sentences = sent_tokenize(&amp;quot;Google is one of the best companies in the world. I constantly google myself to see what i&amp;apos;m to.&amp;quot;)
+nouns = [&amp;apos;NN&amp;apos;,&amp;apos;NNS&amp;apos;,&amp;apos;NNP&amp;apos;,&amp;apos;NNPS&amp;apos;] #将词性标注中属于名词的列出来，统计为名词
+for sentence in sentences:
+    if &amp;apos;google&amp;apos; in sentence.lower(): #判断句子中有没有google一词
+        taggedWords = pos_tag(word_tokenize(sentence)) #
+        for word in taggedWords: #每个是二元组
+            if word[0].lower() == &amp;quot;google&amp;quot; and word[1] in nouns:
+                print(sentence) #打印出包含名词google的句子
+
+#OUT
+Google is one of the best companies in the world.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;自然语言中的许多-歧义问题-都可以用-pos-tag-解决，不只是搜索-目标单词或短语，而是搜索【带标记的目标单词和短语】&quot;&gt;&lt;a href=&quot;#自然语言中的许多-歧义问题-都可以用-pos-tag-解决，不只是搜索-目标单词或短语，而是搜索【带标记的目标单词和短语】&quot; class=&quot;headerlink&quot; title=&quot;自然语言中的许多  歧义问题  都可以用 pos_tag 解决，不只是搜索 目标单词或短语，而是搜索【带标记的目标单词和短语】&quot;&gt;&lt;/a&gt;自然语言中的许多  歧义问题  都可以用 pos_tag 解决，不只是搜索 目标单词或短语，而是搜索【带标记的目标单词和短语】&lt;/h3&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;《python网络数据采集》-一书中自然语言处理基础学习&quot;&gt;&lt;a href=&quot;#《python网络数据采集》-一书中自然语言处理基础学习&quot; class=&quot;headerlink&quot; title=&quot;《python网络数据采集》 一书中自然语言处理基础学习&quot;&gt;&lt;/a&gt;《python网络数据采集》 一书中自然语言处理基础学习&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;# from nltk import word_tokenize
+from nltk import Text
+#用NLTK做统计分析一般都是从Text对象开始的
+tokens = word_tokenize(&amp;quot;here is some not very interesting text is&amp;quot;)
+text = Text(tokens)
+#Text对象的长度就是 单词的个数
+print len(text)
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="读书笔记" scheme="http://yoursite.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="NLTK" scheme="http://yoursite.com/tags/NLTK/"/>
+    
+  </entry>
   
   <entry>
     <title>JAVA hashMap and treeMap</title>
