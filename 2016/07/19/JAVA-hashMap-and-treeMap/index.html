@@ -4,17 +4,24 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives: 2016/4 | 小冉是不是该睡觉了</title>
+  <title>JAVA hashMap and treeMap | 小冉是不是该睡觉了</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="科学证明：长期熬夜容易变sb">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小冉是不是该睡觉了">
-<meta property="og:url" content="http://yoursite.com/archives/2016/04/index.html">
+  <meta name="description" content="这里简单介绍下这两个map也是一些我从网上收集的内容，有些测过有些没测，可能有不对的地方 ：D
+关于hashMap和 treeMapHashMap通过hashcode对其内容进行快速查找，而 TreeMap中所有的元素都保持着某种固定的顺序（内部实现应该是红黑树），如果你需要得到一个有序的结果你就应该使用TreeMap（HashMap中元素的排列顺序是不固定的）。
+性能对比：两种常规Map性能Ha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA hashMap and treeMap">
+<meta property="og:url" content="http://yoursite.com/2016/07/19/JAVA-hashMap-and-treeMap/index.html">
 <meta property="og:site_name" content="小冉是不是该睡觉了">
-<meta property="og:description" content="科学证明：长期熬夜容易变sb">
+<meta property="og:description" content="这里简单介绍下这两个map也是一些我从网上收集的内容，有些测过有些没测，可能有不对的地方 ：D
+关于hashMap和 treeMapHashMap通过hashcode对其内容进行快速查找，而 TreeMap中所有的元素都保持着某种固定的顺序（内部实现应该是红黑树），如果你需要得到一个有序的结果你就应该使用TreeMap（HashMap中元素的排列顺序是不固定的）。
+性能对比：两种常规Map性能Ha">
+<meta property="og:updated_time" content="2016-07-19T08:46:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小冉是不是该睡觉了">
-<meta name="twitter:description" content="科学证明：长期熬夜容易变sb">
+<meta name="twitter:title" content="JAVA hashMap and treeMap">
+<meta name="twitter:description" content="这里简单介绍下这两个map也是一些我从网上收集的内容，有些测过有些没测，可能有不对的地方 ：D
+关于hashMap和 treeMapHashMap通过hashcode对其内容进行快速查找，而 TreeMap中所有的元素都保持着某种固定的顺序（内部实现应该是红黑树），如果你需要得到一个有序的结果你就应该使用TreeMap（HashMap中元素的排列顺序是不固定的）。
+性能对比：两种常规Map性能Ha">
   
     <link rel="alternative" href="/atom.xml" title="小冉是不是该睡觉了" type="application/atom+xml">
   
@@ -190,53 +197,131 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-JAVA-hashMap-and-treeMap" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/04/26/Done/" class="archive-article-date">
-  	<time datetime="2016-04-26T08:10:01.000Z" itemprop="datePublished">Apr 26</time>
+    <div class="article-meta">
+      <a href="/2016/07/19/JAVA-hashMap-and-treeMap/" class="article-date">
+  	<time datetime="2016-07-19T08:28:16.000Z" itemprop="datePublished">2016-07-19</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/26/Done/">Done!</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JAVA hashMap and treeMap
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/">test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/map/">map</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+      </div>
+      
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="这里简单介绍下这两个map"><a href="#这里简单介绍下这两个map" class="headerlink" title="这里简单介绍下这两个map"></a>这里简单介绍下这两个map</h2><p>也是一些我从网上收集的内容，有些测过有些没测，可能有不对的地方 ：D</p>
+<h3 id="关于hashMap和-treeMap"><a href="#关于hashMap和-treeMap" class="headerlink" title="关于hashMap和 treeMap"></a>关于hashMap和 treeMap</h3><p>HashMap通过hashcode对其内容进行快速查找，而 TreeMap中所有的元素都保持着某种固定的顺序（内部实现应该是红黑树），如果你需要得到一个有序的结果你就应该使用TreeMap（HashMap中元素的排列顺序是不固定的）。</p>
+<h3 id="性能对比："><a href="#性能对比：" class="headerlink" title="性能对比："></a>性能对比：</h3><p>两种常规Map性能<br>HashMap：适用于在Map中插入、删除和定位元素。<br>Treemap：适用于按自然顺序或自定义顺序遍历键(key)。</p>
+<a id="more"></a>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>HashMap通常比TreeMap快一点(树和哈希表的数据结构使然)，建议多使用HashMap，在需要排序的Map时候才用TreeMap。</p>
+<h3 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h3><pre><code>Hashtable&lt;String, String&gt; map = new Hashtable&lt;String, String&gt;();
+map.put(&quot;a&quot;, &quot;aaa&quot;);
+//遍历写法（推荐下面的写法，效率高些）
+//遍历key
+for (String key : map.keySet()) {
+    value = map.get(key);
+}
+//遍历整个键值对 :一个entry
+for (Entry&lt;String, String&gt; entry: map.entrySet()) {
+    key = entry.getKey();
+    value = entry.getValue();
+}
+//遍历value
+for (String value : map.values()) {
+
+}
+//判断是否存在key
+map. containsKey(test)
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/16/python-BeautifulSoup-爬虫-简单示例/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python+BeautifulSoup 爬虫 正则 简单示例</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="JAVA-hashMap-and-treeMap" data-title="JAVA hashMap and treeMap" data-url="http://yoursite.com/2016/07/19/JAVA-hashMap-and-treeMap/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -262,8 +347,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false
