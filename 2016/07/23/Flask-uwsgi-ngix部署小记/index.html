@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Flask+uwsgi+ngix部署小记 | 小冉是不是该睡觉了</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~工具：
+Flask：一个使用 Python 编写的轻量级 Web 应用框架 
+uwsgi：是一个Web服务器，它实现了WSGI协议、uws">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask+uwsgi+ngix部署小记">
+<meta property="og:url" content="http://yoursite.com/2016/07/23/Flask-uwsgi-ngix部署小记/index.html">
+<meta property="og:site_name" content="小冉是不是该睡觉了">
+<meta property="og:description" content="背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~工具：
+Flask：一个使用 Python 编写的轻量级 Web 应用框架 
+uwsgi：是一个Web服务器，它实现了WSGI协议、uws">
+<meta property="og:updated_time" content="2016-07-23T05:08:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flask+uwsgi+ngix部署小记">
+<meta name="twitter:description" content="背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~工具：
+Flask：一个使用 Python 编写的轻量级 Web 应用框架 
+uwsgi：是一个Web服务器，它实现了WSGI协议、uws">
+  
+    <link rel="alternative" href="/atom.xml" title="小冉是不是该睡觉了" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xtn7i.com2.z0.glb.clouddn.com/MYlab.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">BetterAA</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">是时候理个发了吧</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="#" title="github">github</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/buaaar@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/BeautifulSoup/" style="font-size: 10px;">BeautifulSoup</a> <a href="/tags/NLTK/" style="font-size: 10px;">NLTK</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/flask/" style="font-size: 10px;">flask</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/map/" style="font-size: 10px;">map</a> <a href="/tags/ngix/" style="font-size: 10px;">ngix</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/异常/" style="font-size: 10px;">异常</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.buaa.edu.cn/">BUAA</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">科学证明：长期熬夜容易变sb</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">BetterAA</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xtn7i.com2.z0.glb.clouddn.com/MYlab.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">BetterAA</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">是时候理个发了吧</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/buaaar@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Flask-uwsgi-ngix部署小记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/23/Flask-uwsgi-ngix部署小记/" class="article-date">
+  	<time datetime="2016-07-23T03:24:32.000Z" itemprop="datePublished">2016-07-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Flask+uwsgi+ngix部署小记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flask/">flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ngix/">ngix</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="背景：-之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful-API，用python-index-py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下"><a href="#背景：-之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful-API，用python-index-py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下" class="headerlink" title="背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~"></a>背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~</h4><h3 id="工具："><a href="#工具：" class="headerlink" title="工具："></a>工具：</h3><ol>
+<li>Flask：一个使用 Python 编写的轻量级 Web 应用框架 </li>
+<li>uwsgi：是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议</li>
+<li>nginx：一个高性能的HTTP和 反向代理 服务器，也是一个 IMAP/POP3/SMTP（电子邮件）服务器</li>
+</ol>
+<h3 id="正式步骤："><a href="#正式步骤：" class="headerlink" title="正式步骤："></a>正式步骤：</h3><a id="more"></a>
+<p>首先，默认上面的三个组件你是安装好的</p>
+<h4 id="1-创建Flask工程（如果已有的话可以直接到2）"><a href="#1-创建Flask工程（如果已有的话可以直接到2）" class="headerlink" title="1. 创建Flask工程（如果已有的话可以直接到2）"></a>1. 创建Flask工程（如果已有的话可以直接到2）</h4><p>这里还是用Helloworld吧~<br>创建一个工程目录helloworld，里面包含主文件index.py</p>
+<p>简单示例代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello World'</span></span><br><span class="line">	    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+<h4 id="2-配置uwsgi"><a href="#2-配置uwsgi" class="headerlink" title="2.配置uwsgi"></a>2.配置uwsgi</h4><p>在上面工程目录Helloworld里面新建一个uwsgi的xml配置文件flasksite.xml<br>示例配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uwsgi</span>&gt;</span></span><br><span class="line">	#这个是上一步新建的工程文件夹，在helloworld里pwd可以看到</span><br><span class="line">	<span class="tag">&lt;<span class="name">pythonpath</span>&gt;</span>/home/ubuntu/helloworld<span class="tag">&lt;/<span class="name">pythonpath</span>&gt;</span></span><br><span class="line">     #这是上一步新建的python文件，模块名即index</span><br><span class="line">     <span class="tag">&lt;<span class="name">module</span>&gt;</span>index<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">     #这是启动服务器的入口，就是index.py里面app.run()的app</span><br><span class="line">     <span class="tag">&lt;<span class="name">callable</span>&gt;</span>app<span class="tag">&lt;/<span class="name">callable</span>&gt;</span></span><br><span class="line">     #配置套接字，与下文的nginx配置一致，用于内部交互</span><br><span class="line">     <span class="tag">&lt;<span class="name">socket</span>&gt;</span>127.0.0.1:8000<span class="tag">&lt;/<span class="name">socket</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">master</span>/&gt;</span></span><br><span class="line">     #跑几个线程</span><br><span class="line">     <span class="tag">&lt;<span class="name">processes</span>&gt;</span>4<span class="tag">&lt;/<span class="name">processes</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">memory-report</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">uwsgi</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其实除了xml文件配置，也可以通过命令行参数方法启动uwsgi时配置，例如<br>sudo uwsgi -s 127.0.0.1：8000 –module index –callable app –process 4</p>
+<h4 id="3-配置nginx"><a href="#3-配置nginx" class="headerlink" title="3.配置nginx"></a>3.配置nginx</h4><p>在/etc/nginx/sites-available目录下，创建站点配置文件helloWorldSite:<br>示例配置如下</p>
+<pre><code>server {
+listen 5000;   #这个是对外转发监听的端口，就是外网访问123.206.23.xx：5000可以响应
+server_name localhost;
+location / {
+#这还是项目的根目录路径
+root /home/ubuntu/helloworld;
+include uwsgi_params;
+#这是对内和uwsgi交互的端口，需要和上面uwsgi的端口一致
+uwsgi_pass 127.0.0.1:8000;
+</code></pre><p>   }<br>}</p>
+<p>然后用ln命令创建一个link从上面sites-available/helloWorldSite到/etc/nginx/sites-enable/里，link的名字叫helloWorldSite，同时删除sites-enable目录下的default的link（注意之前自己也配置过的不知道要不要删除，可以试一下）:</p>
+<pre><code>sudo ln -s /etc/nginx/sites-available/helloWorldSite /etc/nginx/sites-enabled/     
+sudo rm /etc/nginx/sites-enabled/default #去除默认站点配置
+</code></pre><h4 id="4-开始部署"><a href="#4-开始部署" class="headerlink" title="4.开始部署"></a>4.开始部署</h4><p>1）. 启动uwsgi（使用上面配置的uwsgi配置文件）</p>
+<pre><code>sudo uwsgi -x /home/ubuntu/helloworld/flasksite.xml
+</code></pre><p>上面提到过，或者也可以不同xml，直接在命令行里配置参数</p>
+<pre><code>sudo uwsgi -s 127.0.0.1:8000 --module index --callable app --process 4
+</code></pre><p>2）. 新开一个Terminal，在里面启动nginx</p>
+<pre><code>sudo /etc/init.d/nginx start
+</code></pre><p>或者</p>
+<pre><code>sudo service nginx start
+</code></pre><h4 id="5-完成，测试"><a href="#5-完成，测试" class="headerlink" title="5. 完成，测试"></a>5. 完成，测试</h4><p>如果是给本地机器配的话，就直接访问localhost:5000 即可 #因为上面nginx的listen里面是5000</p>
+<p>如果是给服务器配置的的话，就访问服务器的ip：5000即可，完成！</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/19/《python网络数据采集》学习笔记-NLTK/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">《python网络数据采集》学习笔记-NLTK</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Flask-uwsgi-ngix部署小记" data-title="Flask+uwsgi+ngix部署小记" data-url="http://yoursite.com/2016/07/23/Flask-uwsgi-ngix部署小记/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 BetterAA
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

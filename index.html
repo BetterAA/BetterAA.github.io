@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/BeautifulSoup/" style="font-size: 10px;">BeautifulSoup</a> <a href="/tags/NLTK/" style="font-size: 10px;">NLTK</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/map/" style="font-size: 10px;">map</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/异常/" style="font-size: 10px;">异常</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a>
+						<a href="/tags/BeautifulSoup/" style="font-size: 10px;">BeautifulSoup</a> <a href="/tags/NLTK/" style="font-size: 10px;">NLTK</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/flask/" style="font-size: 10px;">flask</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/map/" style="font-size: 10px;">map</a> <a href="/tags/ngix/" style="font-size: 10px;">ngix</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/异常/" style="font-size: 10px;">异常</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,71 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-Flask-uwsgi-ngix部署小记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/23/Flask-uwsgi-ngix部署小记/" class="article-date">
+  	<time datetime="2016-07-23T03:24:32.000Z" itemprop="datePublished">2016-07-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/23/Flask-uwsgi-ngix部署小记/">Flask+uwsgi+ngix部署小记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="背景：-之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful-API，用python-index-py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下"><a href="#背景：-之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful-API，用python-index-py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下" class="headerlink" title="背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~"></a>背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~</h4><h3 id="工具："><a href="#工具：" class="headerlink" title="工具："></a>工具：</h3><ol>
+<li>Flask：一个使用 Python 编写的轻量级 Web 应用框架 </li>
+<li>uwsgi：是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议</li>
+<li>nginx：一个高性能的HTTP和 反向代理 服务器，也是一个 IMAP/POP3/SMTP（电子邮件）服务器</li>
+</ol>
+<h3 id="正式步骤："><a href="#正式步骤：" class="headerlink" title="正式步骤："></a>正式步骤：</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flask/">flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ngix/">ngix</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/23/Flask-uwsgi-ngix部署小记/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-《python网络数据采集》学习笔记-NLTK" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -788,66 +853,10 @@ atoi(source.c_str());
 
 
   
-    <article id="post-Done" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2016/04/26/Done/" class="article-date">
-  	<time datetime="2016-04-26T08:10:01.000Z" itemprop="datePublished">2016-04-26</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/26/Done/">Done!</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="“费了半天劲终于把这个东东弄好了，那么问题来了”"><a href="#“费了半天劲终于把这个东东弄好了，那么问题来了”" class="headerlink" title="“费了半天劲终于把这个东东弄好了，那么问题来了”"></a>“费了半天劲终于把这个东东弄好了，那么问题来了”</h2><p><img src="OMG.jpg" alt="已哭瞎"></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/">test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/04/26/Done/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">

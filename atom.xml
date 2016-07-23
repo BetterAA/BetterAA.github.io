@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-19T09:38:51.000Z</updated>
+  <updated>2016-07-23T05:08:20.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,70 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Flask+uwsgi+ngix部署小记</title>
+    <link href="http://yoursite.com/2016/07/23/Flask-uwsgi-ngix%E9%83%A8%E7%BD%B2%E5%B0%8F%E8%AE%B0/"/>
+    <id>http://yoursite.com/2016/07/23/Flask-uwsgi-ngix部署小记/</id>
+    <published>2016-07-23T03:24:32.000Z</published>
+    <updated>2016-07-23T05:08:20.000Z</updated>
+    
+    <content type="html">&lt;h4 id=&quot;背景：-之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful-API，用python-index-py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下&quot;&gt;&lt;a href=&quot;#背景：-之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful-API，用python-index-py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下&quot; class=&quot;headerlink&quot; title=&quot;背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~&quot;&gt;&lt;/a&gt;背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~&lt;/h4&gt;&lt;h3 id=&quot;工具：&quot;&gt;&lt;a href=&quot;#工具：&quot; class=&quot;headerlink&quot; title=&quot;工具：&quot;&gt;&lt;/a&gt;工具：&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;Flask：一个使用 Python 编写的轻量级 Web 应用框架 &lt;/li&gt;
+&lt;li&gt;uwsgi：是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议&lt;/li&gt;
+&lt;li&gt;nginx：一个高性能的HTTP和 反向代理 服务器，也是一个 IMAP/POP3/SMTP（电子邮件）服务器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;正式步骤：&quot;&gt;&lt;a href=&quot;#正式步骤：&quot; class=&quot;headerlink&quot; title=&quot;正式步骤：&quot;&gt;&lt;/a&gt;正式步骤：&lt;/h3&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;首先，默认上面的三个组件你是安装好的&lt;/p&gt;
+&lt;h4 id=&quot;1-创建Flask工程（如果已有的话可以直接到2）&quot;&gt;&lt;a href=&quot;#1-创建Flask工程（如果已有的话可以直接到2）&quot; class=&quot;headerlink&quot; title=&quot;1. 创建Flask工程（如果已有的话可以直接到2）&quot;&gt;&lt;/a&gt;1. 创建Flask工程（如果已有的话可以直接到2）&lt;/h4&gt;&lt;p&gt;这里还是用Helloworld吧~&lt;br&gt;创建一个工程目录helloworld，里面包含主文件index.py&lt;/p&gt;
+&lt;p&gt;简单示例代码&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; flask &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; Flask&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;app = Flask(__name__)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@app.route(&#39;/&#39;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Hello World&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; __name__ == &lt;span class=&quot;string&quot;&gt;&#39;__main__&#39;&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    app.run()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;2-配置uwsgi&quot;&gt;&lt;a href=&quot;#2-配置uwsgi&quot; class=&quot;headerlink&quot; title=&quot;2.配置uwsgi&quot;&gt;&lt;/a&gt;2.配置uwsgi&lt;/h4&gt;&lt;p&gt;在上面工程目录Helloworld里面新建一个uwsgi的xml配置文件flasksite.xml&lt;br&gt;示例配置：&lt;/p&gt;
+&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;uwsgi&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	#这个是上一步新建的工程文件夹，在helloworld里pwd可以看到&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;pythonpath&lt;/span&gt;&amp;gt;&lt;/span&gt;/home/ubuntu/helloworld&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;pythonpath&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     #这是上一步新建的python文件，模块名即index&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;module&lt;/span&gt;&amp;gt;&lt;/span&gt;index&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;module&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     #这是启动服务器的入口，就是index.py里面app.run()的app&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;callable&lt;/span&gt;&amp;gt;&lt;/span&gt;app&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;callable&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     #配置套接字，与下文的nginx配置一致，用于内部交互&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;socket&lt;/span&gt;&amp;gt;&lt;/span&gt;127.0.0.1:8000&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;socket&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;master&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     #跑几个线程&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;processes&lt;/span&gt;&amp;gt;&lt;/span&gt;4&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;processes&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;memory-report&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;uwsgi&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其实除了xml文件配置，也可以通过命令行参数方法启动uwsgi时配置，例如&lt;br&gt;sudo uwsgi -s 127.0.0.1：8000 –module index –callable app –process 4&lt;/p&gt;
+&lt;h4 id=&quot;3-配置nginx&quot;&gt;&lt;a href=&quot;#3-配置nginx&quot; class=&quot;headerlink&quot; title=&quot;3.配置nginx&quot;&gt;&lt;/a&gt;3.配置nginx&lt;/h4&gt;&lt;p&gt;在/etc/nginx/sites-available目录下，创建站点配置文件helloWorldSite:&lt;br&gt;示例配置如下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;server {
+listen 5000;   #这个是对外转发监听的端口，就是外网访问123.206.23.xx：5000可以响应
+server_name localhost;
+location / {
+#这还是项目的根目录路径
+root /home/ubuntu/helloworld;
+include uwsgi_params;
+#这是对内和uwsgi交互的端口，需要和上面uwsgi的端口一致
+uwsgi_pass 127.0.0.1:8000;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;   }&lt;br&gt;}&lt;/p&gt;
+&lt;p&gt;然后用ln命令创建一个link从上面sites-available/helloWorldSite到/etc/nginx/sites-enable/里，link的名字叫helloWorldSite，同时删除sites-enable目录下的default的link（注意之前自己也配置过的不知道要不要删除，可以试一下）:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo ln -s /etc/nginx/sites-available/helloWorldSite /etc/nginx/sites-enabled/     
+sudo rm /etc/nginx/sites-enabled/default #去除默认站点配置
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;4-开始部署&quot;&gt;&lt;a href=&quot;#4-开始部署&quot; class=&quot;headerlink&quot; title=&quot;4.开始部署&quot;&gt;&lt;/a&gt;4.开始部署&lt;/h4&gt;&lt;p&gt;1）. 启动uwsgi（使用上面配置的uwsgi配置文件）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo uwsgi -x /home/ubuntu/helloworld/flasksite.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上面提到过，或者也可以不同xml，直接在命令行里配置参数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo uwsgi -s 127.0.0.1:8000 --module index --callable app --process 4
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2）. 新开一个Terminal，在里面启动nginx&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo /etc/init.d/nginx start
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo service nginx start
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;5-完成，测试&quot;&gt;&lt;a href=&quot;#5-完成，测试&quot; class=&quot;headerlink&quot; title=&quot;5. 完成，测试&quot;&gt;&lt;/a&gt;5. 完成，测试&lt;/h4&gt;&lt;p&gt;如果是给本地机器配的话，就直接访问localhost:5000 即可 #因为上面nginx的listen里面是5000&lt;/p&gt;
+&lt;p&gt;如果是给服务器配置的的话，就访问服务器的ip：5000即可，完成！&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;背景：-之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful-API，用python-index-py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下&quot;&gt;&lt;a href=&quot;#背景：-之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful-API，用python-index-py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下&quot; class=&quot;headerlink&quot; title=&quot;背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~&quot;&gt;&lt;/a&gt;背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~&lt;/h4&gt;&lt;h3 id=&quot;工具：&quot;&gt;&lt;a href=&quot;#工具：&quot; class=&quot;headerlink&quot; title=&quot;工具：&quot;&gt;&lt;/a&gt;工具：&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;Flask：一个使用 Python 编写的轻量级 Web 应用框架 &lt;/li&gt;
+&lt;li&gt;uwsgi：是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议&lt;/li&gt;
+&lt;li&gt;nginx：一个高性能的HTTP和 反向代理 服务器，也是一个 IMAP/POP3/SMTP（电子邮件）服务器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;正式步骤：&quot;&gt;&lt;a href=&quot;#正式步骤：&quot; class=&quot;headerlink&quot; title=&quot;正式步骤：&quot;&gt;&lt;/a&gt;正式步骤：&lt;/h3&gt;
+    
+    </summary>
+    
+    
+      <category term="flask" scheme="http://yoursite.com/tags/flask/"/>
+    
+      <category term="ngix" scheme="http://yoursite.com/tags/ngix/"/>
+    
+  </entry>
   
   <entry>
     <title>《python网络数据采集》学习笔记-NLTK</title>
