@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-23T05:08:20.000Z</updated>
+  <updated>2016-10-03T08:58:29.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,100 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>docker 使用小记</title>
+    <link href="http://yoursite.com/2016/10/03/docker-%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0/"/>
+    <id>http://yoursite.com/2016/10/03/docker-使用小记/</id>
+    <published>2016-10-03T03:29:36.000Z</published>
+    <updated>2016-10-03T08:58:29.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近看师兄笔试安全工程师的题有很多考docker的，这两天来安装docker顺便来体验下。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;依旧是简介：docker是什么&quot;&gt;&lt;a href=&quot;#依旧是简介：docker是什么&quot; class=&quot;headerlink&quot; title=&quot;依旧是简介：docker是什么&quot;&gt;&lt;/a&gt;依旧是简介：docker是什么&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;开源引擎&lt;/li&gt;
+&lt;li&gt;可以轻松为任何为任何应用创建一个轻量级、可移植、自给自足的容器&lt;/li&gt;
+&lt;li&gt;容器可以批量在生产环境中部署，包括 虚拟机、OpenStack集群&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;上手体验过程&quot;&gt;&lt;a href=&quot;#上手体验过程&quot; class=&quot;headerlink&quot; title=&quot;上手体验过程&quot;&gt;&lt;/a&gt;上手体验过程&lt;/h2&gt;&lt;h3 id=&quot;1-安装下载&quot;&gt;&lt;a href=&quot;#1-安装下载&quot; class=&quot;headerlink&quot; title=&quot;1. 安装下载&quot;&gt;&lt;/a&gt;1. 安装下载&lt;/h3&gt;&lt;p&gt;建议从官网下载安装包，这样能保证不会出现奇怪的问题&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://download.docker.com/mac/stable/Docker.dmg&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;mac版地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://download.docker.com/win/stable/InstallDocker.msi&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;windows版地址&lt;/a&gt;&lt;br&gt;我的百度云盘上存了备份&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://docs.docker.com/engine/installation/linux/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;linux版的地址&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;安装完毕之后 docker version 查看安装情况&lt;/p&gt;
+&lt;h3 id=&quot;2-搜索可用的镜像&quot;&gt;&lt;a href=&quot;#2-搜索可用的镜像&quot; class=&quot;headerlink&quot; title=&quot;2. 搜索可用的镜像&quot;&gt;&lt;/a&gt;2. 搜索可用的镜像&lt;/h3&gt;&lt;p&gt;docker search xxx&lt;br&gt;这里以tutorial镜像为例&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;docker search tutorial&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;会找到不同用户空间下的名为tutorial的镜像，在docker的镜像索引网站上，镜像都是按照 用户名/镜像名 的方式来存储的。除了部分 像ubuntu这类基础镜像，经过官方验证，可信，可以直接用镜像名来检索到&lt;br&gt;（这里的用户指的是hub.docker.io官方的注册用户，建议同时也在docker官网上注册下，否则docker login时候会出问题）&lt;/p&gt;
+&lt;h3 id=&quot;3-下载镜像&quot;&gt;&lt;a href=&quot;#3-下载镜像&quot; class=&quot;headerlink&quot; title=&quot;3. 下载镜像&quot;&gt;&lt;/a&gt;3. 下载镜像&lt;/h3&gt;&lt;p&gt;根据镜像的存储方式，用docker pull 即可。(和git类似)&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#下载learn用户下的tutorial镜像&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker pull learn/tutorial&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;4-在docker容器中运行hello-world&quot;&gt;&lt;a href=&quot;#4-在docker容器中运行hello-world&quot; class=&quot;headerlink&quot; title=&quot;4. 在docker容器中运行hello world&quot;&gt;&lt;/a&gt;4. 在docker容器中运行hello world&lt;/h3&gt;&lt;p&gt;docker run命令可以启动某个镜像，并运行一个命令&lt;br&gt;注： 【docker容器】可以理解为在沙盒中运行的【进程】，但是沙盒默认不会运行任何程序，你需要在沙盒中运行一个进程来启动某个容器。 这个进程是该容器的【唯一进程】&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#docker run &amp;lt;image name&amp;gt; &amp;lt;command&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker run learn/tutorial &lt;span class=&quot;built_in&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;hello world&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;5-在容器中安装新的程序&quot;&gt;&lt;a href=&quot;#5-在容器中安装新的程序&quot; class=&quot;headerlink&quot; title=&quot;5. 在容器中安装新的程序&quot;&gt;&lt;/a&gt;5. 在容器中安装新的程序&lt;/h3&gt;&lt;p&gt;例子中要给之前pull的learn/tutorial镜像安装一个ping程序，因为tutorial是基于ubuntu的，因此可以通过apt-get来按照 &lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# -y参数避免进入交互模式，不需要确认&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker run learn/tutorial apt-get install -y ping&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;6-保存对容器的修改&quot;&gt;&lt;a href=&quot;#6-保存对容器的修改&quot; class=&quot;headerlink&quot; title=&quot;6. 保存对容器的修改&quot;&gt;&lt;/a&gt;6. 保存对容器的修改&lt;/h3&gt;&lt;p&gt;当对一个容器修改之后（例如上文docker run运行一个命令），可以把修改保存下来，下次从新版本上继续&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#获取按照完ping之后的容器id（只用到前几位区分即可），然后把这个镜像保存为betteraa/tutorial&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker ps &lt;span class=&quot;_&quot;&gt;-l&lt;/span&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker commit 84e betteraa/tutorial  &lt;span class=&quot;comment&quot;&gt;#利用上一步得到id&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;从此就有了一个新的镜像，名为betteraa/tutorial ，可以和上面一个docker run在里面运行新的命令&lt;/p&gt;
+&lt;h3 id=&quot;7-查看运行中的镜像&quot;&gt;&lt;a href=&quot;#7-查看运行中的镜像&quot; class=&quot;headerlink&quot; title=&quot;7. 查看运行中的镜像&quot;&gt;&lt;/a&gt;7. 查看运行中的镜像&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;docker ps &lt;span class=&quot;comment&quot;&gt;#查看正在运行中的容器列表&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker inspect xxx &lt;span class=&quot;comment&quot;&gt;#查看更详细的关于一个容器的信息，xxx是id的前几位&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;8-发布修改后的镜像&quot;&gt;&lt;a href=&quot;#8-发布修改后的镜像&quot; class=&quot;headerlink&quot; title=&quot;8. 发布修改后的镜像&quot;&gt;&lt;/a&gt;8. 发布修改后的镜像&lt;/h3&gt;&lt;p&gt;步骤： 查看已有的镜像信息-》登录docker账号-》发布指定镜像&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;docker images &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker login  &lt;span class=&quot;comment&quot;&gt;#登录自己的docker，这里是betteraa&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker push betteraa/tutorial  &lt;span class=&quot;comment&quot;&gt;#只能发布到自己的名字空间中，所以这里是betteraa&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;strong&gt;————— 我是华丽的分割线 —————-&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;上文是个简单的过程介绍，是先用一个已有的镜像，然后修改commit成一个新的镜像后发布，其实也可以自己制作镜像然后发布。&lt;/p&gt;
+&lt;h3 id=&quot;下面介绍个简单的通过Dockerfile制作镜像的过程&quot;&gt;&lt;a href=&quot;#下面介绍个简单的通过Dockerfile制作镜像的过程&quot; class=&quot;headerlink&quot; title=&quot;下面介绍个简单的通过Dockerfile制作镜像的过程&quot;&gt;&lt;/a&gt;&lt;strong&gt;下面介绍个简单的通过Dockerfile制作镜像的过程&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;当你在使用 Docker构建镜像的时候，每一个命令都会在前一个命令的基础上形成一个新层&lt;/p&gt;
+&lt;p&gt;通过Dockerfile自动构建容器的过程 其实就相当于上文把每个docker run的命令打包一起写到 一个Dockerfile文件中， 不过Dockerfile也有自己的一套简单的语法&lt;/p&gt;
+&lt;p&gt;Docker语法包含两部分，注释# + 命令&lt;br&gt;这里先列举几个常用的，然后附上一个Dockerfile文件作为参考。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;FROM ubuntu:14.10 使用哪个镜像作为基础镜像启动构建流程
+MAINTAINER xxx 定义作者
+RUN   用于【创建镜像】的命令，在之前commit层之上形成新的层
+CMD   和run不同的是，这些命令不是在镜像构建过程中执行的，而是在镜像构建容器之后被调用
+ENV  SERVER_WORK 4 设置环境变量，以key value形式定义
+ADD命令有两个参数，源和目标。它的基本作用是从源系统的文件系统上复制文件到目标容器的文件系统。如果源是一个URL，那该URL的内容将被下载并复制到容器中。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;    &lt;/p&gt;
+&lt;h3 id=&quot;示例：-创建一个Nginx的镜像&quot;&gt;&lt;a href=&quot;#示例：-创建一个Nginx的镜像&quot; class=&quot;headerlink&quot; title=&quot;示例： 创建一个Nginx的镜像&quot;&gt;&lt;/a&gt;&lt;strong&gt;示例： 创建一个Nginx的镜像&lt;/strong&gt;&lt;/h3&gt;&lt;h5 id=&quot;1-创建一个Dockerfile文件&quot;&gt;&lt;a href=&quot;#1-创建一个Dockerfile文件&quot; class=&quot;headerlink&quot; title=&quot;1.  创建一个Dockerfile文件&quot;&gt;&lt;/a&gt;1.  创建一个Dockerfile文件&lt;/h5&gt;&lt;pre&gt;&lt;code&gt;vim Dockerfile
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&quot;2-编辑Dockerfile文件&quot;&gt;&lt;a href=&quot;#2-编辑Dockerfile文件&quot; class=&quot;headerlink&quot; title=&quot;2. 编辑Dockerfile文件&quot;&gt;&lt;/a&gt;2. 编辑Dockerfile文件&lt;/h5&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#Set the base image to Ubuntu&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;FROM ubuntu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# File Author / Maintainer&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;MAINTAINER Example McAuthor&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;设置命令与参数下载Nginx&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Install Nginx&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Add application repository URL to the default sources&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;RUN &lt;span class=&quot;built_in&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;deb http://archive.ubuntu.com/ubuntu/ raring main 	universe&quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/apt/sources.list&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Update the repository&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;RUN apt-get update&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Install necessary tools&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;RUN apt-get install -y nano wget dialog net-tools&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Download and Install Nginx&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;RUN apt-get install -y nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;安装nginx之后，需要配置Nginx并且替换掉其默认的配置文件&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Remove the default Nginx configuration file&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;RUN rm -v /etc/nginx/nginx.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Copy a configuration file from the current directory&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ADD nginx.conf /etc/nginx/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Append &quot;daemon off;&quot; to the beginning of the configuration&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;RUN &lt;span class=&quot;built_in&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;daemon off;&quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/nginx/nginx.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Expose ports&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;EXPOSE 80&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Set the default command to execute&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# when creating a new container&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;CMD service nginx start&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;保存Dockerfile文件&lt;br&gt;这里ADD命令用到了一个nginx配置文件 ngnix.conf&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vim ngnix.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;具体配置如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;worker_processes 1;
+events { worker_connections 1024; }
+http {
+     sendfile on;
+         server {
+         listen 80;
+         location / {
+              proxy_pass http://httpstat.us/;
+              proxy_set_header X-Real-IP $remote_addr;
+         }
+     }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;保存ngnix.conf&lt;/p&gt;
+&lt;h5 id=&quot;3-开始构建镜像&quot;&gt;&lt;a href=&quot;#3-开始构建镜像&quot; class=&quot;headerlink&quot; title=&quot;3. 开始构建镜像&quot;&gt;&lt;/a&gt;3. 开始构建镜像&lt;/h5&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;docker build -t my_ngnix .&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;strong&gt;—————— 又是华丽的分割线 —————-&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id=&quot;关于docker镜像的清理与删除&quot;&gt;&lt;a href=&quot;#关于docker镜像的清理与删除&quot; class=&quot;headerlink&quot; title=&quot;关于docker镜像的清理与删除&quot;&gt;&lt;/a&gt;&lt;strong&gt;关于docker镜像的清理与删除&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;关于docker仓库的镜像的删除&lt;br&gt;其实感觉每个镜像都挺大的，因此清理下冗余的镜像也是有必要的&lt;/p&gt;
+&lt;h5 id=&quot;1-停止所有的container，这样才能删除其中的images&quot;&gt;&lt;a href=&quot;#1-停止所有的container，这样才能删除其中的images&quot; class=&quot;headerlink&quot; title=&quot;1. 停止所有的container，这样才能删除其中的images&quot;&gt;&lt;/a&gt;1. 停止所有的container，这样才能删除其中的images&lt;/h5&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;docker stop $(docker ps -a -q)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h5 id=&quot;2-删除容器与删除镜像&quot;&gt;&lt;a href=&quot;#2-删除容器与删除镜像&quot; class=&quot;headerlink&quot; title=&quot;2. 删除容器与删除镜像&quot;&gt;&lt;/a&gt;2. 删除容器与删除镜像&lt;/h5&gt;&lt;p&gt;删除容器 docker rm +id&lt;br&gt;删除全部容器  docker rm $(docker ps -a -q)&lt;br&gt;删除镜像 docker rmi （image id)  #通过docker images获得镜像id&lt;/p&gt;
+&lt;p&gt;删除全部镜像 docker rmi $(docker images -q)&lt;br&gt;（【docker容器】可以理解为在沙盒中运行的【进程】）&lt;br&gt;删除镜像有依赖关系的注意不能跨越子镜像，直接删除母镜像，需要按照入栈顺序来&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;strong&gt;—————— 最后的分割线 ———————-&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id=&quot;docker的本地私有仓库搭建&quot;&gt;&lt;a href=&quot;#docker的本地私有仓库搭建&quot; class=&quot;headerlink&quot; title=&quot;docker的本地私有仓库搭建&quot;&gt;&lt;/a&gt;docker的本地私有仓库搭建&lt;/h3&gt;&lt;p&gt;和Maven一样， docker不仅提供了一个中央仓库（hub.docekr.io），同时也允许registry搭建本地私有仓库（就像本地git仓库）&lt;br&gt;好处：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;节省带宽， 比中央仓库快很多。&lt;/li&gt;
+&lt;li&gt;针对公司内部使用的镜像，可以供公司内部使用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;详细过程这里不展开谈了，需要的话可以参考这篇博文&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/wangtaoking1/article/details/44180901&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Docker学习笔记 — Docker私有仓库搭建&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;大家国庆愉快~ 祖国母亲快乐 2016-10-3&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近看师兄笔试安全工程师的题有很多考docker的，这两天来安装docker顺便来体验下。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>Flask+uwsgi+ngix部署小记</title>
