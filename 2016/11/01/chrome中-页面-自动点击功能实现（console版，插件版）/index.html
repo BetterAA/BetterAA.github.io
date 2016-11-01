@@ -4,51 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>python+BeautifulSoup 爬虫 正则 简单示例 | 小冉是不是该睡觉了</title>
+  <title>chrome中 页面 自动点击功能实现（console版，插件版） | 小冉是不是该睡觉了</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##这里是直接用源码+重要注释
-#-*- coding:utf-8 -*-
-from urllib import urlopen
-from bs4 import BeautifulSoup
-import requests
-import re
-import time
-
-url = &amp;quot;&amp;quot;
-domain = &amp;quot;&amp;quot;
-
-sessions = requests.Sess">
+  <meta name="description" content="背景： 比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净 ；P">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python+BeautifulSoup 爬虫 正则 简单示例">
-<meta property="og:url" content="http://yoursite.com/2016/07/16/python-BeautifulSoup-爬虫-简单示例/index.html">
+<meta property="og:title" content="chrome中 页面 自动点击功能实现（console版，插件版）">
+<meta property="og:url" content="http://yoursite.com/2016/11/01/chrome中-页面-自动点击功能实现（console版，插件版）/index.html">
 <meta property="og:site_name" content="小冉是不是该睡觉了">
-<meta property="og:description" content="##这里是直接用源码+重要注释
-#-*- coding:utf-8 -*-
-from urllib import urlopen
-from bs4 import BeautifulSoup
-import requests
-import re
-import time
-
-url = &amp;quot;&amp;quot;
-domain = &amp;quot;&amp;quot;
-
-sessions = requests.Sess">
-<meta property="og:updated_time" content="2016-07-16T14:01:01.000Z">
+<meta property="og:description" content="背景： 比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净 ；P">
+<meta property="og:updated_time" content="2016-11-01T07:32:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python+BeautifulSoup 爬虫 正则 简单示例">
-<meta name="twitter:description" content="##这里是直接用源码+重要注释
-#-*- coding:utf-8 -*-
-from urllib import urlopen
-from bs4 import BeautifulSoup
-import requests
-import re
-import time
-
-url = &amp;quot;&amp;quot;
-domain = &amp;quot;&amp;quot;
-
-sessions = requests.Sess">
+<meta name="twitter:title" content="chrome中 页面 自动点击功能实现（console版，插件版）">
+<meta name="twitter:description" content="背景： 比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净 ；P">
   
     <link rel="alternative" href="/atom.xml" title="小冉是不是该睡觉了" type="application/atom+xml">
   
@@ -224,11 +191,11 @@ sessions = requests.Sess">
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-python-BeautifulSoup-爬虫-简单示例" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-chrome中-页面-自动点击功能实现（console版，插件版）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/16/python-BeautifulSoup-爬虫-简单示例/" class="article-date">
-  	<time datetime="2016-07-16T13:52:52.000Z" itemprop="datePublished">2016-07-16</time>
+      <a href="/2016/11/01/chrome中-页面-自动点击功能实现（console版，插件版）/" class="article-date">
+  	<time datetime="2016-11-01T06:53:09.000Z" itemprop="datePublished">2016-11-01</time>
 </a>
     </div>
   
@@ -241,7 +208,7 @@ sessions = requests.Sess">
         
   
     <h1 class="article-title" itemprop="name">
-      python+BeautifulSoup 爬虫 正则 简单示例
+      chrome中 页面 自动点击功能实现（console版，插件版）
     </h1>
   
 
@@ -250,7 +217,7 @@ sessions = requests.Sess">
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BeautifulSoup/">BeautifulSoup</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chrome插件/">chrome插件</a></li></ul>
 	</div>
 
         
@@ -261,63 +228,35 @@ sessions = requests.Sess">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##这里是直接用源码+重要注释</p>
-<pre><code>#-*- coding:utf-8 -*-
-from urllib import urlopen
-from bs4 import BeautifulSoup
-import requests
-import re
-import time
+        <h3 id="背景：-比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净-；P"><a href="#背景：-比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净-；P" class="headerlink" title="背景： 比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净 ；P"></a>背景： 比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净 ；P</h3><a id="more"></a>
+<h3 id="测试场景："><a href="#测试场景：" class="headerlink" title="测试场景："></a>测试场景：</h3><p>自己写了一个测试界面，<a href="http://123.206.23.200:5000/index" target="_blank" rel="external">点击这里</a><br>需要点击三次之后才能调到后台处理,模拟需要多次点击场景</p>
+<h3 id="方法一：-直接在chrome的console运行代码"><a href="#方法一：-直接在chrome的console运行代码" class="headerlink" title="方法一： 直接在chrome的console运行代码"></a>方法一： 直接在chrome的console运行代码</h3><p>F12打开检查元素页面，点击source标签，可以直接在下面的console中写js代码在当前页面执行，例如</p>
+<pre><code>//循环alert 5次
+for(var i=0; i&lt;5;i++) alert(i);
+</code></pre><p>不过这样刷新页面后就没有了，也可以在source标签下面的snippets标签中new一个临时脚本，把上面代码放进去，以后仍然可以继续访问，右键选择evaluate in console同样在console中运行</p>
+<h3 id="方法二：chrome插件版本"><a href="#方法二：chrome插件版本" class="headerlink" title="方法二：chrome插件版本"></a>方法二：chrome插件版本</h3><p>chrome运行加载自己开发的插件，不过需要按照一定的格式，其中包括配置文件manifest.json, 插件图标,以及自己的脚本文件。</p>
+<p>先新建一个文件夹，用来放置需要的文件，在文件夹中：</p>
+<h4 id="1-新建一个文本文件-manifest-json，内容如下："><a href="#1-新建一个文本文件-manifest-json，内容如下：" class="headerlink" title="1. 新建一个文本文件 manifest.json，内容如下："></a>1. 新建一个文本文件 manifest.json，内容如下：</h4><pre><code>{
+      &quot;name&quot;: &quot;第一个Chrome插件&quot;,
+    &quot;manifest_version&quot;: 2,
+    &quot;version&quot;: &quot;0.0.1&quot;,
+    &quot;description&quot;: &quot;第一个Chrome插件,自动点击&quot;,
+    &quot;browser_action&quot;: {
+    &quot;default_icon&quot;: &quot;1.png&quot;
+    },
+    &quot;content_scripts&quot;: [
+    {
+        &quot;matches&quot;: [&quot;http://123.206.23.200:5000/index&quot;],
+        &quot;js&quot;: [&quot;myscript.js&quot;,&quot;jquery.js&quot;]
+    }]        
+}
+}
+</code></pre><p>解释一下最后content_scripts，matches代表在只匹配到的页面中加载这个插件，这里设置为我们的测试页面，可以用正则改为所有页面中都使用 [“<a href="http://*/*&quot;,&quot;https://*/*" target="_blank" rel="external">http://*/*&quot;,&quot;https://*/*</a>“]<br>js代表我们需要加载的自己用的脚本文件，这里myscript是自己的脚本，顺便把jquery也加进去了<br>(对了，记得放一张1.png文件作为图标)</p>
+<h4 id="2-myscript-js-内容如下："><a href="#2-myscript-js-内容如下：" class="headerlink" title="2. myscript.js 内容如下："></a>2. myscript.js 内容如下：</h4><pre><code>setInterval(function () {document.forms[0].submitBtn.click(); },1800);
+</code></pre><p>意思是每隔1.8s 触发一次提交动作。这里是在检查了测试页面的提交方法之后写的</p>
+<h4 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h4><p>在chrome中，打开chrome://extensions/， 点击 加载已解压的扩展程序 ，选择刚刚新建的文件夹，确定之后就加载成功了，工具栏中可以看到新的图标。 打开<a href="http://123.206.23.200:5000/index" target="_blank" rel="external">测试页面</a>进行测试吧 ：）</p>
+<p>每次修改扩展程序之后可以点击重新加载，最后测试完成之后可以 打包成crx文件。<br>其实crx文件是个压缩文件，可以改下后缀解压。 复杂点的功能可以下一个现成的crx解压打开看下学习</p>
 
-url = &quot;&quot;
-domain = &quot;&quot;
-
-sessions = requests.Session()
-#注意; 这里没有对编码处理，输出中文字符乱码。。decode（“utf-8”）
-</code></pre><a id="more"></a>
-<pre><code>#还有别的header也可以加
-header = {&quot;User-Agent&quot;:&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12&quot;}
-req = sessions.get(url,headers=header)
-
-bsObj = BeautifulSoup(req.text)
-#可以直接找tbody，省的再先找table，但是这样没有那样稳妥
-#findAll和find函数都是的第一个都是标签的类型，如p，div，后面的{}是属性集合
-#第一个标签类型也可以不填，那就都找
-table_tbody = bsObj.find(&quot;tbody&quot;,{&quot;style&quot;:&quot;table-layout:fixed;&quot;})
-trs = table_tbody.findAll(&quot;tr&quot;,{&quot;class&quot;:&quot;tr3 t_one&quot;})
-
-subURLs = []
-for tr in trs:
-_url = tr.find(&quot;a&quot;,{&quot;target&quot;:&quot;_blank&quot;}).attrs[&quot;href”]  #找到标签后用attrs可以找到属性
-subURLs.append(domain+_url)
-
-#print &apos;\n&apos;.join(subURLs)
-#边爬数据边写，避免中途异常后无数据
-out = open(&quot;./out&quot;,&quot;w&quot;)
-
-real_url = []
-for _url in subURLs:
-#记得异常处理
-try:
-    #这里避免请求太频繁，因此每次暂停2秒
-    time.sleep(2)
-    print &apos;In url: &apos;+_url
-    _req = sessions.get(_url,headers= header)
-    _bsObj = BeautifulSoup(_req.text)
-    _a = _bsObj.find(&quot;div&quot;,{&quot;class&quot;:&quot;tpc_content do_not_catch&quot;}).find(&quot;a&quot;,{&quot;style&quot;:&quot;cursor:pointer&quot;})
-#_a.get_text() 可以得到a标签的文本
-#（.*?）是正则里面的东西，可以匹配全部的内容，前面\’是’转义，此处我们的待匹配字符串是.src=.....’” style..
-#我们要取到的是src后面...
-    #real_url.append(re.findall(r&apos;.src=\&apos;(.*?)\&apos;\&quot; style&apos;,str(_a))[0])  #转成字符串str处理
-    out.write(re.findall(r&apos;.src=\&apos;(.*?)\&apos;\&quot; style&apos;,str(_a))[0]+&apos;\n&apos;)
-except:
-    print &apos;爬取失败&apos;
-finally:
-    out.close()
-
-out.close()
-#out.write(&apos;\n&apos;.join(real_url))
-</code></pre>
       
     </div>
     
@@ -326,18 +265,9 @@ out.close()
     
 <nav id="article-nav">
   
-    <a href="/2016/07/19/JAVA-hashMap-and-treeMap/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          JAVA hashMap and treeMap
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/07/05/JAVA异常：Comparison-method-violates-its-general-contract/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JAVA异常：Comparison method violates its general contract</div>
+    <a href="/2016/10/03/docker-使用小记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">docker 使用小记</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -372,7 +302,7 @@ out.close()
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="python-BeautifulSoup-爬虫-简单示例" data-title="python+BeautifulSoup 爬虫 正则 简单示例" data-url="http://yoursite.com/2016/07/16/python-BeautifulSoup-爬虫-简单示例/"></div>
+	<div class="ds-thread" data-thread-key="chrome中-页面-自动点击功能实现（console版，插件版）" data-title="chrome中 页面 自动点击功能实现（console版，插件版）" data-url="http://yoursite.com/2016/11/01/chrome中-页面-自动点击功能实现（console版，插件版）/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

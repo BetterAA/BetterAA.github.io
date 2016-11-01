@@ -16,7 +16,7 @@ uwsgi：是一个Web服务器，它实现了WSGI协议、uws">
 <meta property="og:description" content="背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~工具：
 Flask：一个使用 Python 编写的轻量级 Web 应用框架 
 uwsgi：是一个Web服务器，它实现了WSGI协议、uws">
-<meta property="og:updated_time" content="2016-07-23T05:08:20.000Z">
+<meta property="og:updated_time" content="2016-11-01T06:51:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flask+uwsgi+ngix部署小记">
 <meta name="twitter:description" content="背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~工具：
@@ -123,7 +123,7 @@ uwsgi：是一个Web服务器，它实现了WSGI协议、uws">
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/BeautifulSoup/" style="font-size: 10px;">BeautifulSoup</a> <a href="/tags/NLTK/" style="font-size: 10px;">NLTK</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flask/" style="font-size: 10px;">flask</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/map/" style="font-size: 10px;">map</a> <a href="/tags/ngix/" style="font-size: 10px;">ngix</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/异常/" style="font-size: 10px;">异常</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a>
+						<a href="/tags/BeautifulSoup/" style="font-size: 10px;">BeautifulSoup</a> <a href="/tags/NLTK/" style="font-size: 10px;">NLTK</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/chrome插件/" style="font-size: 10px;">chrome插件</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flask/" style="font-size: 10px;">flask</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/map/" style="font-size: 10px;">map</a> <a href="/tags/ngix/" style="font-size: 10px;">ngix</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/异常/" style="font-size: 10px;">异常</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a>
 					</div>
 				</section>
 				
@@ -271,6 +271,7 @@ sudo rm /etc/nginx/sites-enabled/default #去除默认站点配置
 <pre><code>sudo service nginx start
 </code></pre><h4 id="5-完成，测试"><a href="#5-完成，测试" class="headerlink" title="5. 完成，测试"></a>5. 完成，测试</h4><p>如果是给本地机器配的话，就直接访问localhost:5000 即可 #因为上面nginx的listen里面是5000</p>
 <p>如果是给服务器配置的的话，就访问服务器的ip：5000即可，完成！</p>
+<h4 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h4><p>由于这个改了后台程序之后不能自动部署更新，所以如果要更新功能想要开启debug模式的话，可以把uwsgi进程关掉，（nginx不用关），然后用python FlaskTest.py运行后台脚本，等到功能测试成功之后再停掉python，重新启动uwsgi</p>
 
       
     </div>

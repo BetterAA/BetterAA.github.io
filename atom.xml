@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-03T08:59:23.000Z</updated>
+  <updated>2016-11-01T07:32:14.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>chrome中 页面 自动点击功能实现（console版，插件版）</title>
+    <link href="http://yoursite.com/2016/11/01/chrome%E4%B8%AD-%E9%A1%B5%E9%9D%A2-%E8%87%AA%E5%8A%A8%E7%82%B9%E5%87%BB%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%EF%BC%88console%E7%89%88%EF%BC%8C%E6%8F%92%E4%BB%B6%E7%89%88%EF%BC%89/"/>
+    <id>http://yoursite.com/2016/11/01/chrome中-页面-自动点击功能实现（console版，插件版）/</id>
+    <published>2016-11-01T06:53:09.000Z</published>
+    <updated>2016-11-01T07:32:14.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;背景：-比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净-；P&quot;&gt;&lt;a href=&quot;#背景：-比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净-；P&quot; class=&quot;headerlink&quot; title=&quot;背景： 比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净 ；P&quot;&gt;&lt;/a&gt;背景： 比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净 ；P&lt;/h3&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;测试场景：&quot;&gt;&lt;a href=&quot;#测试场景：&quot; class=&quot;headerlink&quot; title=&quot;测试场景：&quot;&gt;&lt;/a&gt;测试场景：&lt;/h3&gt;&lt;p&gt;自己写了一个测试界面，&lt;a href=&quot;http://123.206.23.200:5000/index&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;点击这里&lt;/a&gt;&lt;br&gt;需要点击三次之后才能调到后台处理,模拟需要多次点击场景&lt;/p&gt;
+&lt;h3 id=&quot;方法一：-直接在chrome的console运行代码&quot;&gt;&lt;a href=&quot;#方法一：-直接在chrome的console运行代码&quot; class=&quot;headerlink&quot; title=&quot;方法一： 直接在chrome的console运行代码&quot;&gt;&lt;/a&gt;方法一： 直接在chrome的console运行代码&lt;/h3&gt;&lt;p&gt;F12打开检查元素页面，点击source标签，可以直接在下面的console中写js代码在当前页面执行，例如&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//循环alert 5次
+for(var i=0; i&amp;lt;5;i++) alert(i);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;不过这样刷新页面后就没有了，也可以在source标签下面的snippets标签中new一个临时脚本，把上面代码放进去，以后仍然可以继续访问，右键选择evaluate in console同样在console中运行&lt;/p&gt;
+&lt;h3 id=&quot;方法二：chrome插件版本&quot;&gt;&lt;a href=&quot;#方法二：chrome插件版本&quot; class=&quot;headerlink&quot; title=&quot;方法二：chrome插件版本&quot;&gt;&lt;/a&gt;方法二：chrome插件版本&lt;/h3&gt;&lt;p&gt;chrome运行加载自己开发的插件，不过需要按照一定的格式，其中包括配置文件manifest.json, 插件图标,以及自己的脚本文件。&lt;/p&gt;
+&lt;p&gt;先新建一个文件夹，用来放置需要的文件，在文件夹中：&lt;/p&gt;
+&lt;h4 id=&quot;1-新建一个文本文件-manifest-json，内容如下：&quot;&gt;&lt;a href=&quot;#1-新建一个文本文件-manifest-json，内容如下：&quot; class=&quot;headerlink&quot; title=&quot;1. 新建一个文本文件 manifest.json，内容如下：&quot;&gt;&lt;/a&gt;1. 新建一个文本文件 manifest.json，内容如下：&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;{
+      &amp;quot;name&amp;quot;: &amp;quot;第一个Chrome插件&amp;quot;,
+    &amp;quot;manifest_version&amp;quot;: 2,
+    &amp;quot;version&amp;quot;: &amp;quot;0.0.1&amp;quot;,
+    &amp;quot;description&amp;quot;: &amp;quot;第一个Chrome插件,自动点击&amp;quot;,
+    &amp;quot;browser_action&amp;quot;: {
+    &amp;quot;default_icon&amp;quot;: &amp;quot;1.png&amp;quot;
+    },
+    &amp;quot;content_scripts&amp;quot;: [
+    {
+        &amp;quot;matches&amp;quot;: [&amp;quot;http://123.206.23.200:5000/index&amp;quot;],
+        &amp;quot;js&amp;quot;: [&amp;quot;myscript.js&amp;quot;,&amp;quot;jquery.js&amp;quot;]
+    }]        
+}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;解释一下最后content_scripts，matches代表在只匹配到的页面中加载这个插件，这里设置为我们的测试页面，可以用正则改为所有页面中都使用 [“&lt;a href=&quot;http://*/*&amp;quot;,&amp;quot;https://*/*&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://*/*&amp;quot;,&amp;quot;https://*/*&lt;/a&gt;“]&lt;br&gt;js代表我们需要加载的自己用的脚本文件，这里myscript是自己的脚本，顺便把jquery也加进去了&lt;br&gt;(对了，记得放一张1.png文件作为图标)&lt;/p&gt;
+&lt;h4 id=&quot;2-myscript-js-内容如下：&quot;&gt;&lt;a href=&quot;#2-myscript-js-内容如下：&quot; class=&quot;headerlink&quot; title=&quot;2. myscript.js 内容如下：&quot;&gt;&lt;/a&gt;2. myscript.js 内容如下：&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;setInterval(function () {document.forms[0].submitBtn.click(); },1800);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;意思是每隔1.8s 触发一次提交动作。这里是在检查了测试页面的提交方法之后写的&lt;/p&gt;
+&lt;h4 id=&quot;3-测试&quot;&gt;&lt;a href=&quot;#3-测试&quot; class=&quot;headerlink&quot; title=&quot;3. 测试&quot;&gt;&lt;/a&gt;3. 测试&lt;/h4&gt;&lt;p&gt;在chrome中，打开chrome://extensions/， 点击 加载已解压的扩展程序 ，选择刚刚新建的文件夹，确定之后就加载成功了，工具栏中可以看到新的图标。 打开&lt;a href=&quot;http://123.206.23.200:5000/index&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;测试页面&lt;/a&gt;进行测试吧 ：）&lt;/p&gt;
+&lt;p&gt;每次修改扩展程序之后可以点击重新加载，最后测试完成之后可以 打包成crx文件。&lt;br&gt;其实crx文件是个压缩文件，可以改下后缀解压。 复杂点的功能可以下一个现成的crx解压打开看下学习&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;背景：-比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净-；P&quot;&gt;&lt;a href=&quot;#背景：-比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净-；P&quot; class=&quot;headerlink&quot; title=&quot;背景： 比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净 ；P&quot;&gt;&lt;/a&gt;背景： 比较好奇这个功能，今天特意来写写，真的是好久不写js忘的一干二净 ；P&lt;/h3&gt;
+    
+    </summary>
+    
+    
+      <category term="chrome插件" scheme="http://yoursite.com/tags/chrome%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>docker 使用小记</title>
@@ -113,7 +161,7 @@ http {
     <link href="http://yoursite.com/2016/07/23/Flask-uwsgi-ngix%E9%83%A8%E7%BD%B2%E5%B0%8F%E8%AE%B0/"/>
     <id>http://yoursite.com/2016/07/23/Flask-uwsgi-ngix部署小记/</id>
     <published>2016-07-23T03:24:32.000Z</published>
-    <updated>2016-07-23T05:08:20.000Z</updated>
+    <updated>2016-11-01T06:51:25.000Z</updated>
     
     <content type="html">&lt;h4 id=&quot;背景：-之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful-API，用python-index-py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下&quot;&gt;&lt;a href=&quot;#背景：-之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful-API，用python-index-py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下&quot; class=&quot;headerlink&quot; title=&quot;背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~&quot;&gt;&lt;/a&gt;背景： 之前在腾讯云的服务器上面用Flask写了一些小东东作为后台，温习了一下RESTful API，用python index.py就可以跑起来，但是过一段时间自己会停掉，当然还有很多其他问题，于是准备试试如何正式部署到wsgi服务器环境，亲测可用，小记一下~&lt;/h4&gt;&lt;h3 id=&quot;工具：&quot;&gt;&lt;a href=&quot;#工具：&quot; class=&quot;headerlink&quot; title=&quot;工具：&quot;&gt;&lt;/a&gt;工具：&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;Flask：一个使用 Python 编写的轻量级 Web 应用框架 &lt;/li&gt;
@@ -152,6 +200,7 @@ sudo rm /etc/nginx/sites-enabled/default #去除默认站点配置
 &lt;pre&gt;&lt;code&gt;sudo service nginx start
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;5-完成，测试&quot;&gt;&lt;a href=&quot;#5-完成，测试&quot; class=&quot;headerlink&quot; title=&quot;5. 完成，测试&quot;&gt;&lt;/a&gt;5. 完成，测试&lt;/h4&gt;&lt;p&gt;如果是给本地机器配的话，就直接访问localhost:5000 即可 #因为上面nginx的listen里面是5000&lt;/p&gt;
 &lt;p&gt;如果是给服务器配置的的话，就访问服务器的ip：5000即可，完成！&lt;/p&gt;
+&lt;h4 id=&quot;注：&quot;&gt;&lt;a href=&quot;#注：&quot; class=&quot;headerlink&quot; title=&quot;注：&quot;&gt;&lt;/a&gt;注：&lt;/h4&gt;&lt;p&gt;由于这个改了后台程序之后不能自动部署更新，所以如果要更新功能想要开启debug模式的话，可以把uwsgi进程关掉，（nginx不用关），然后用python FlaskTest.py运行后台脚本，等到功能测试成功之后再停掉python，重新启动uwsgi&lt;/p&gt;
 </content>
     
     <summary type="html">
