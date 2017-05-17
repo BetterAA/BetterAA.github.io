@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-01T07:32:14.000Z</updated>
+  <updated>2017-05-17T02:10:34.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Generalized ESD Test for outliers</title>
+    <link href="http://yoursite.com/2017/05/17/Generalized-ESD-Test-for-outliers/"/>
+    <id>http://yoursite.com/2017/05/17/Generalized-ESD-Test-for-outliers/</id>
+    <published>2017-05-17T01:09:14.000Z</published>
+    <updated>2017-05-17T02:10:34.000Z</updated>
+    
+    <content type="html">&lt;p&gt;generalized (extreme Studentized deviate) ESD: 检测一个或多个异常值在一个近似服从正太分布的单变量数据集中&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;原文翻译自 &lt;a href=&quot;http://www.itl.nist.gov/div898/handbook/eda/section3/eda35h3.htm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generalized ESD Test for outliers&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;参数： r 异常点个数上限&lt;/p&gt;
+&lt;p&gt; 给定上限，generalized ESD 独立执行r次检验，检验只有一个    outlier，检验只有2个outlier。。检验有r个outlier&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;定义： H0:  dataset 中无outlier ；  H1： dataset中最多有r个outlier&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;test： 计算统计量&lt;br&gt; &lt;img src=&quot;ri.png&quot; alt=&quot;ri&quot;&gt;&lt;br&gt;x平均：样本均值，s代表样本标准差，移去使得观测值中|xi-x均|最大的点，然后对于剩余n-1个计算上述统计量。重复上述过程直到r个观测值被移去。即r次检验统计量R1，R2。。Rr&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;显著性水平α及临界域&lt;br&gt; 对于r检验统计量，计算以下r临界值：&lt;br&gt; &lt;img src=&quot;la.png&quot; alt=&quot;la&quot;&gt;&lt;br&gt; t p,v 代表从t分布中v水平的百分比 &lt;img src=&quot;p.png&quot; alt=&quot;p&quot;&gt;&lt;br&gt; outlier的数量通过寻找最大的i使得 Ri&amp;gt; λi&lt;/p&gt;
+&lt;p&gt; &lt;img src=&quot;exp1.png&quot; alt=&quot;exp1&quot;&gt;&lt;br&gt; &lt;img src=&quot;exp2.png&quot; alt=&quot;exp2&quot;&gt;&lt;br&gt; 从实验中可以看出，检验统计量大于临界值的最大的outlier数量是3，因此我们认为dataset中有3个outlier&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;generalized (extreme Studentized deviate) ESD: 检测一个或多个异常值在一个近似服从正太分布的单变量数据集中&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="ouliers detect" scheme="http://yoursite.com/tags/ouliers-detect/"/>
+    
+  </entry>
   
   <entry>
     <title>chrome中 页面 自动点击功能实现（console版，插件版）</title>
